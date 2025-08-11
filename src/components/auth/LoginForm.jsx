@@ -1,22 +1,24 @@
 import react, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../services/apiProcessor.js";
+import useForm from "../../hooks/form.js";
 
 function BasicExample() {
   const navigate = useNavigate();
-  const [userDetails, setUserDetails] = useState({ email: "", password: "" });
+  const initialState = { email: "", password: "" };
+  const { form, handleChange } = useForm(initialState);
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const result = await axios.post(
-        "http://localhost:4000/api/v1/auth/login",
-        { email: userDetails.email, password: userDetails.password }
-      );
+      const result = await loginUser({ ...form });
       if (result) {
-        result.data.status
-          ? navigate("/dashboard")
-          : alert("Username or password was incorrect");
+        if (result.status) {
+          localStorage.setItem("accessToken", result.data.accessToken);
+          navigate("/dashboard");
+        } else {
+          alert("Username or password was incorrect");
+        }
       }
     } catch (error) {
       console.log(error.message);
@@ -24,10 +26,6 @@ function BasicExample() {
     }
   }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserDetails((prev) => ({ ...prev, [name]: value }));
-  };
   return (
     <form
       onSubmit={handleSubmit}
@@ -51,7 +49,7 @@ function BasicExample() {
         required
         fullWidth
         onChange={handleChange}
-        value={userDetails.email}
+        value={form.email}
       />
       <TextField
         type="password"
@@ -60,7 +58,7 @@ function BasicExample() {
         required
         fullWidth
         onChange={handleChange}
-        value={userDetails.password}
+        value={form.password}
       />
       <Button
         variant="contained"

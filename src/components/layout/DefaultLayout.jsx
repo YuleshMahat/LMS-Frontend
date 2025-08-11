@@ -10,7 +10,12 @@ const DefaultLayout = () => {
       <Nav />
       <main
         className="main"
-        style={{ flexGrow: 1, flexDirection: "column", display: "flex" }}
+        style={{
+          flexGrow: 1,
+          flexDirection: "column",
+          display: "flex",
+          alignItems: "center",
+        }}
       >
         <Outlet />
       </main>

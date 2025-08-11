@@ -1,45 +1,34 @@
 import React, { useState } from "react";
 import { Box, TextField, Typography, Button } from "@mui/material";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { createUser } from "../../services/apiProcessor.js";
+import { ToastContainer, toast } from "react-toastify";
+import useForm from "../../hooks/form.js";
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
-  const [userDetails, setUserDetails] = useState({
+  const initialState = {
     lName: "",
     fName: "",
     email: "",
     password: "",
     phone: "",
-  });
+  };
+  const { form, handleChange } = useForm(initialState);
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const result = await axios.post(
-        "http://localhost:4000/api/v1/auth/register",
-        {
-          email: userDetails.email,
-          password: userDetails.password,
-          fName: userDetails.fName,
-          lName: userDetails.lName,
-          phone: userDetails.phone,
-        }
-      );
+      const result = await createUser({
+        ...form,
+      });
       if (result) {
-        result.data.status
-          ? navigate("/login")
-          : alert("Username or password was incorrect");
+        result.status
+          ? toast.success("Please verify your email.")
+          : toast.error("Failed to register. Try again!");
       }
     } catch (error) {
       console.log(error.message);
       alert("An error occured during registering.");
     }
   }
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserDetails((prev) => ({ ...prev, [name]: value }));
-  };
   return (
     <form
       onSubmit={handleSubmit}
@@ -60,7 +49,7 @@ const RegisterForm = () => {
       <TextField
         label="First Name"
         name="fName"
-        value={userDetails.fName}
+        value={form.fName}
         required
         fullWidth
         onChange={handleChange}
@@ -68,7 +57,7 @@ const RegisterForm = () => {
       <TextField
         label="Last Name"
         name="lName"
-        value={userDetails.lName}
+        value={form.lName}
         required
         fullWidth
         onChange={handleChange}
@@ -79,7 +68,7 @@ const RegisterForm = () => {
         type="email"
         required
         fullWidth
-        value={userDetails.email}
+        value={form.email}
         onChange={handleChange}
       />
       <TextField
@@ -88,14 +77,14 @@ const RegisterForm = () => {
         type="password"
         required
         fullWidth
-        value={userDetails.password}
+        value={form.password}
         onChange={handleChange}
       />
       <TextField
         label="Phone"
         name="phone"
         fullWidth
-        value={userDetails.phone}
+        value={form.phone}
         onChange={handleChange}
       />
       <Button
@@ -105,6 +94,7 @@ const RegisterForm = () => {
       >
         Submit
       </Button>
+      <ToastContainer />
     </form>
   );
 };

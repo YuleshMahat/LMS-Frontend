@@ -1,7 +1,12 @@
 import React from "react";
-
+import CarouselComp from "../components/home/CarouselComp.jsx";
+import { Container } from "@mui/material";
 const Dashboard = () => {
-  return <div>This is a dashboard.</div>;
+  return (
+    <Container>
+      <CarouselComp />
+    </Container>
+  );
 };
 
 export default Dashboard;
