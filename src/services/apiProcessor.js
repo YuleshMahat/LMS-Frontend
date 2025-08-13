@@ -1,15 +1,13 @@
 import axios from "axios";
-const apiUrl = import.meta.env.VITE_APP_API_URL + "/api/v1";
-console.log(apiUrl);
+import { getToken } from "./storageFunctions.js";
+export const apiUrl = import.meta.env.VITE_APP_API_URL + "/api/v1";
 export const apiProcessor = async ({ method, data, url, isPrivate }) => {
   try {
     let response = await axios({
       method: method,
       url: url,
       data: data,
-      headers: isPrivate
-        ? { Authorization: localStorage.getItem("accessToken") }
-        : {},
+      headers: isPrivate ? { Authorization: getToken("access") } : {},
     });
 
     return response.data;

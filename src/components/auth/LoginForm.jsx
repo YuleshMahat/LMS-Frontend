@@ -1,24 +1,23 @@
-import react, { useState } from "react";
+import react from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../services/apiProcessor.js";
+import { loginUserAction } from "../../features/auth/authActions.js";
 import useForm from "../../hooks/form.js";
+import { useDispatch } from "react-redux";
 
 function BasicExample() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const initialState = { email: "", password: "" };
   const { form, handleChange } = useForm(initialState);
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const result = await loginUser({ ...form });
-      if (result) {
-        if (result.status) {
-          localStorage.setItem("accessToken", result.data.accessToken);
-          navigate("/dashboard");
-        } else {
-          alert("Username or password was incorrect");
-        }
+      const result = await dispatch(loginUserAction({ ...form }));
+      if (result?.status) {
+        navigate("/dashboard");
+      } else {
+        alert("Username or password was incorrect");
       }
     } catch (error) {
       console.log(error.message);

@@ -4,7 +4,8 @@ import { Container } from "@mui/material";
 const Dashboard = () => {
   return (
     <Container>
-      <CarouselComp />
+      This is a dashboard page.
+      {/* <CarouselComp /> */}
     </Container>
   );
 };

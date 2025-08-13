@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  token: localStorage.getItem("accessToken") || null,
-  userData: null,
+  userData: {},
 };
 
 const userSlice = createSlice({
@@ -18,5 +17,8 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUserData, clearUserData } = userSlice.actions;
-export default userSlice.reducer;
+// export const { setUserData, clearUserData } = userSlice.actions;
+// export default userSlice.reducer;
+export const { reducer, actions } = userSlice;
+export const { setUserData, clearUserData } = actions;
+export default reducer;

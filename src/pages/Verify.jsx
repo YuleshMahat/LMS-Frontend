@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Container } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { verifyEmail } from "../services/apiProcessor.js";
 
@@ -26,9 +26,19 @@ const Verify = () => {
     checkLoading();
   }, []);
   return (
-    <Container>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1,
+      }}
+    >
       {isLoading ? (
-        <Box>Please wait until we verify your email</Box>
+        <Box>
+          <Button>Loading</Button>
+          <Typography>Please wait until we verify your email</Typography>
+        </Box>
       ) : (
         <Box>Your email has been verified.</Box>
       )}
