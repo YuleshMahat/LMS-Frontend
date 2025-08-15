@@ -15,6 +15,7 @@ function BasicExample() {
     try {
       const result = await dispatch(loginUserAction({ ...form }));
       if (result?.status) {
+        console.log("Result status from login page", result.status);
         navigate("/dashboard");
       } else {
         alert("Username or password was incorrect");

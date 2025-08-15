@@ -19,7 +19,7 @@ export const loginUserAction = (form) => async (dispatch) => {
   if (data.status) {
     storeToken(data.accessToken, "access");
     storeToken(data.refreshToken, "refresh");
-    dispatch(getUserDetails());
+    await dispatch(getUserDetails());
   }
 
   return { status: data.status, message: data.message };

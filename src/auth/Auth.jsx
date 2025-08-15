@@ -4,7 +4,6 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const Auth = ({ children }) => {
   const { userData } = useSelector((store) => store.userStore);
-  console.log(userData);
   const location = useLocation();
 
   return (
