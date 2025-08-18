@@ -1,17 +1,49 @@
 import axios from "axios";
-import { getToken } from "./storageFunctions.js";
+import { getToken, storeToken } from "./storageFunctions.js";
 export const apiUrl = import.meta.env.VITE_APP_API_URL + "/api/v1";
-export const apiProcessor = async ({ method, data, url, isPrivate }) => {
+import { regenerateAccessToken } from "../features/users/userAPI.js";
+
+export const apiProcessor = async ({
+  method,
+  data,
+  url,
+  isPrivate,
+  isRefresh = false,
+}) => {
   try {
     let response = await axios({
       method: method,
       url: url,
       data: data,
-      headers: isPrivate ? { Authorization: getToken("access") } : {},
+      headers: isPrivate
+        ? {
+            Authorization: isRefresh ? getToken("refresh") : getToken("access"),
+          }
+        : {},
     });
 
     return response.data;
   } catch (err) {
+    console.log("catch block of api processor.");
+    console.log(err.response.data.message);
+    if (err?.response?.data?.message.trim().includes("Expired access token")) {
+      console.log("Inside if block of catch");
+      const data = await regenerateAccessToken();
+
+      if (data?.accessToken) {
+        console.log("After regenerating token new token ", data.accessToken);
+        console.log("refresh token", getToken("refresh"));
+        storeToken(data.accessToken, "access");
+        return apiProcessor({
+          method,
+          data,
+          url,
+          isPrivate,
+          isRefresh,
+        });
+      }
+    }
+
     return {
       status: false,
       message: "Error processing the api request",

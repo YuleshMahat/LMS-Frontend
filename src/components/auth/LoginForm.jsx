@@ -1,13 +1,16 @@
-import react from "react";
+import react, { useEffect } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { loginUserAction } from "../../features/auth/authActions.js";
 import useForm from "../../hooks/form.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 function BasicExample() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location);
   const initialState = { email: "", password: "" };
   const { form, handleChange } = useForm(initialState);
   async function handleSubmit(e) {
@@ -15,16 +18,23 @@ function BasicExample() {
     try {
       const result = await dispatch(loginUserAction({ ...form }));
       if (result?.status) {
-        console.log("Result status from login page", result.status);
         navigate("/dashboard");
+        toast.success("Login Successful");
       } else {
-        alert("Username or password was incorrect");
+        toast.error("Username or password incorrect");
       }
     } catch (error) {
       console.log(error.message);
       alert("An error occured during loggin in");
     }
   }
+
+  const { userData } = useSelector((store) => store.userStore);
+  let previousLocation = location?.state?.from.pathname || "/dashboard";
+
+  useEffect(() => {
+    userData?._id && navigate(previousLocation);
+  }, [userData?._id]);
 
   return (
     <form
@@ -67,6 +77,7 @@ function BasicExample() {
       >
         Submit
       </Button>
+      <ToastContainer />
     </form>
   );
 }

@@ -5,16 +5,18 @@ import { Box } from "@mui/material";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { FaBook } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Navigation = () => {
+  const { userData } = useSelector((state) => state.userStore);
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "space-between",
         padding: "1rem 2rem",
-        bgcolor: "#7A85C1",
-        fontSize: "1.5rem",
+        bgcolor: "#3b38a0",
+        fontSize: "1.8rem",
         color: "black",
       }}
     >
@@ -35,7 +37,7 @@ const Navigation = () => {
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
             <IoPerson />
-            Login
+            {userData?._id ? userData.fName : "Login"}
           </Box>
         </Link>
         <Link
@@ -46,7 +48,7 @@ const Navigation = () => {
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
             <GrLogin />
-            Register
+            {userData?._id ? "Logout" : "Register"}
           </Box>
         </Link>
       </Box>

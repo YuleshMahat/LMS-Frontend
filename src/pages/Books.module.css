@@ -1,0 +1,22 @@
+.bookContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 2rem;
+}
+
+.addButton {
+  background-color: #0f828c;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  align-self: flex-end;
+  font-size: 1rem;
+  font-weight: 550;
+}
+
+.bookList {
+  display: grid;
+  grid-template-columns: 80px 1fr 200px 100px;
+  gap: 0.5rem;
+}

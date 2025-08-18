@@ -1,24 +1,29 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import DefaultLayout from "./components/layout/DefaultLayout.jsx";
+import DashboardLayout from "./components/layout/DashboardLayout.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Home from "./pages/Home.jsx";
 import Verify from "./pages/Verify.jsx";
 import Auth from "./auth/Auth.jsx";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getUserDetails } from "./features/auth/authActions.js";
+import AddBook from "./pages/AddBook.jsx";
+import { Books } from "./pages/Books.jsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector((store) => store.userStore);
   const autoLogin = async () => {
     let data = await dispatch(getUserDetails());
   };
+
   useEffect(() => {
+    console.log("APP");
     autoLogin();
-  }, [userData?._id]);
+  }, []);
   return (
     <>
       <div className="wrapper">
@@ -27,6 +32,9 @@ const App = () => {
             <Route path="" element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="verify-email" element={<Verify />} />
+          </Route>
+          <Route path="*" element={<DashboardLayout />}>
             <Route
               path="dashboard"
               element={
@@ -35,7 +43,22 @@ const App = () => {
                 </Auth>
               }
             />
-            <Route path="verify-email" element={<Verify />} />
+            <Route
+              path="addBook"
+              element={
+                <Auth>
+                  <AddBook />
+                </Auth>
+              }
+            />
+            <Route
+              path="books"
+              element={
+                <Auth>
+                  <Books />
+                </Auth>
+              }
+            />
           </Route>
         </Routes>
       </div>

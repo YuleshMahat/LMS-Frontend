@@ -2,7 +2,7 @@ export const storeToken = (token, type) => {
   if (type === "access") {
     sessionStorage.setItem("accessToken", token);
   }
-  if ((type = "refresh")) {
+  if (type === "refresh") {
     localStorage.setItem("refreshToken", token);
   }
 };

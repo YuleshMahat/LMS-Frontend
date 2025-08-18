@@ -7,7 +7,6 @@ export const getUserDetails = () => async (dispatch) => {
   console.log("GetUserDetails function triggered. this is a private route");
   let data = await fetchUserDetails();
   if (data?.status) {
-    console.log(data);
     dispatch(setUserData(data.user));
   }
   return { status: data.status, message: data.message };
@@ -15,8 +14,8 @@ export const getUserDetails = () => async (dispatch) => {
 
 export const loginUserAction = (form) => async (dispatch) => {
   let data = await loginUser(form);
-
   if (data.status) {
+    console.log(data.accessToken, data.refreshToken);
     storeToken(data.accessToken, "access");
     storeToken(data.refreshToken, "refresh");
     await dispatch(getUserDetails());
