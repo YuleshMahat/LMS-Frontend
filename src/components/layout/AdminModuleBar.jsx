@@ -11,13 +11,16 @@ import { IoPerson } from "react-icons/io5";
 import { MdSpaceDashboard } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "@mui/material";
+import { IoBookSharp } from "react-icons/io5";
 
 const AdminModuleBar = () => {
   const { userData } = useSelector((state) => state.userStore);
   return (
     <div className="moduleBar">
-      <Typography variant="h3">LOGO</Typography>
-      <Typography>Welcome {userData.fName}</Typography>
+      <IoBookSharp size={80} />
+      <Typography sx={{ fontWeight: "bold", fontSize: "2rem" }}>
+        Welcome {userData.fName}
+      </Typography>
       <Divider sx={{ border: "solid white 2px", width: "100%", my: 1 }} />
       <ul className="moduleOptions">
         <li>

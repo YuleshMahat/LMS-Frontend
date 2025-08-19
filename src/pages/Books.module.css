@@ -6,13 +6,18 @@
 }
 
 .addButton {
-  background-color: #0f828c;
+  background-color: #3b38a0;
   border-radius: 5px;
   border: none;
   padding: 10px;
   align-self: flex-end;
   font-size: 1rem;
+  color: white;
   font-weight: 550;
+}
+
+.addButton:hover {
+  background-color: #7573b0;
 }
 
 .bookList {

@@ -16,8 +16,8 @@ const Navigation = () => {
         justifyContent: "space-between",
         padding: "1rem 2rem",
         bgcolor: "#3b38a0",
-        fontSize: "1.8rem",
-        color: "black",
+        fontSize: "1.3rem",
+        color: "white",
       }}
     >
       <Box>

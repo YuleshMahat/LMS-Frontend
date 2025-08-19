@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -56,17 +56,10 @@ body {
   gap: "0.35rem";
 }
 
-.addBookForm {
-  max-width: 50vw;
-  background-color: #7a85c1;
-  height: fit-content;
-  padding: 3rem;
-  border-radius: 10px;
-}
-
 .addBookContainer {
+  background-color: #4b4d595f;
   display: flex;
   justify-content: center;
   flex-grow: 1;
-  margin-top: 3rem;
+  padding: 1rem;
 }

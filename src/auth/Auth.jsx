@@ -7,13 +7,8 @@ const Auth = ({ children }) => {
   const token = getToken("access");
   let user = {};
   if (token) {
-    console.log("token exists getting userData from store");
     const { userData } = useSelector((store) => store.userStore);
     user = userData;
-    console.log("userdata on auth", userData);
-    if (userData?._id)
-      console.log("User data exist in store check from auth componnet");
-    else console.log("user data does not exist in store check from auth");
   }
 
   return (
