@@ -56,7 +56,6 @@ function BasicExample() {
         type="email"
         label="Email"
         name="email"
-        required
         fullWidth
         onChange={handleChange}
         value={form.email}

@@ -57,9 +57,29 @@ body {
 }
 
 .addBookContainer {
-  background-color: #4b4d595f;
+  background-color: #7f818c54;
   display: flex;
   justify-content: center;
   flex-grow: 1;
   padding: 1rem;
+}
+
+.addBookForm {
+  width: 80%;
+  margin: 2rem 0;
+}
+/* edit button customization on the books page table */
+.editButton {
+  background-color: #5b57c2;
+  min-width: 50px;
+  width: calc(max-content + 10px);
+  border: none;
+  border-radius: 3px;
+  color: white;
+  margin-right: 10px;
+}
+
+#updateButton {
+  background-color: rgb(193, 26, 26);
+  margin-right: 0;
 }

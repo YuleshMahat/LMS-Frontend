@@ -15,7 +15,7 @@ const Navigation = () => {
         display: "flex",
         justifyContent: "space-between",
         padding: "1rem 2rem",
-        bgcolor: "#3b38a0",
+        bgcolor: "#625fbcff",
         fontSize: "1.3rem",
         color: "white",
       }}

@@ -8,3 +8,12 @@ export const addNewBook = (obj) => {
     isPrivate: true,
   });
 };
+
+export const getBooks = (filterObj) => {
+  return apiProcessor({
+    method: "get",
+    url: `${apiUrl}/book`,
+    isPrivate: true,
+    data: filterObj,
+  });
+};

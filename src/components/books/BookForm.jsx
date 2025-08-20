@@ -13,14 +13,15 @@ function BookForm() {
     publishedYear: "",
     genre: "",
   };
-  const { form, handleChange } = useForm(initialState);
+  const { form, setForm, handleChange } = useForm(initialState);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await addNewBook(form);
     if (data.status) {
+      setForm(initialState);
       toast["success"]("Added book successfully");
     } else {
-      toast["error"]("Error");
+      toast["error"](data?.message || "Error adding the book");
     }
   };
   return (
