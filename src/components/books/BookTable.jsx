@@ -1,20 +1,18 @@
 import Table from "react-bootstrap/Table";
-import react, { useEffect, useState } from "react";
-import { getBooks } from "../../features/book/bookApi.js";
+import react, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBookAction } from "../../features/book/bookActions.js";
+import { setSelectedBook } from "../../features/book/bookSlice.js";
 
 function StripedRowExample() {
-  const [books, setBooks] = useState([]);
-  const getBook = async () => {
-    const data = await getBooks({});
-    if (data?.status) {
-      
-    } else {
-      console.log("Error fetching books from the databases");
-    }
-  };
+  const dispatch = useDispatch();
+  const { books } = useSelector((state) => state.bookStore);
 
   useEffect(() => {
-    getBook();
+    const result = dispatch(getBookAction());
+    if (!result.status) {
+      console.log(result.message);
+    }
   }, []);
 
   return (
@@ -44,9 +42,16 @@ function StripedRowExample() {
             <td>{book.availability}</td>
             <td>{book.status}</td>
             <td>
-              <button className="editButton">Edit</button>
+              <button
+                className="editButton"
+                onClick={() => {
+                  dispatch(setSelectedBook(book._id));
+                }}
+              >
+                Edit
+              </button>
               <button className="editButton" id="updateButton">
-                Update
+                Delete
               </button>
             </td>
           </tr>

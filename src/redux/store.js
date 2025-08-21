@@ -5,6 +5,6 @@ import bookReducer from "../features/book/bookSlice.js";
 export default configureStore({
   reducer: {
     userStore: userReducer,
-    bookStore: bookRedcuer,
+    bookStore: bookReducer,
   },
 });

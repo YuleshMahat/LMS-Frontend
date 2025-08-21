@@ -4,24 +4,19 @@ import useForm from "../../hooks/form.js";
 import { toast, ToastContainer } from "react-toastify";
 import "../../App.css";
 import { addBookAction } from "../../features/book/bookActions.js";
-import { useDispatch } from "react-redux";
-function BookForm() {
+import { useDispatch, useSelector } from "react-redux";
+function EditBookForm() {
   const dispatch = useDispatch();
-  const initialState = {
-    title: "",
-    author: "",
-    description: "",
-    isbn: "",
-    publishedYear: "",
-    genre: "",
-  };
-  const { form, setForm, handleChange } = useForm(initialState);
+  const navigate = useNavigate();
+  const { selectedBook } = useSelector((state) => state.bookStore);
+  const initialState = selectedBook;
+  const { form, handleChange } = useForm(initialState);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(addBookAction(form));
     if (data.status) {
-      setForm(initialState);
       toast["success"]("Added book successfully");
+      navigate("/books");
     } else {
       toast["error"](data?.message || "Error adding the book");
     }
@@ -101,4 +96,4 @@ function BookForm() {
   );
 }
 
-export default BookForm;
+export default EditBookForm;
