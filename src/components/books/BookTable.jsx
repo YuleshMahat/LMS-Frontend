@@ -1,11 +1,13 @@
 import Table from "react-bootstrap/Table";
-import react, { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBookAction } from "../../features/book/bookActions.js";
 import { setSelectedBook } from "../../features/book/bookSlice.js";
+import { useNavigate } from "react-router-dom";
 
 function StripedRowExample() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { books } = useSelector((state) => state.bookStore);
 
   useEffect(() => {
@@ -39,13 +41,14 @@ function StripedRowExample() {
             <td>{book.isbn}</td>
             <td>{book.genre}</td>
             <td>{book.publishedYear}</td>
-            <td>{book.availability}</td>
             <td>{book.status}</td>
+            <td>{book.availability ? "Available" : "Not Available"}</td>
             <td>
               <button
                 className="editButton"
                 onClick={() => {
-                  dispatch(setSelectedBook(book._id));
+                  dispatch(setSelectedBook(book));
+                  navigate("/editbook");
                 }}
               >
                 Edit

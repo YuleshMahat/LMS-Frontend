@@ -2,7 +2,7 @@
 // useDispatch is a hook and a hook cannot be used outside of react component
 // we are passing in dispatch function as an argument thats why we need the thunk pattern
 import { setBooks } from "./bookSlice.js";
-import { addNewBook, getBooks } from "./bookApi.js";
+import { addNewBook, getBooks, editBook } from "./bookApi.js";
 
 export const getBookAction = () => async (dispatch) => {
   const data = await getBooks({});
@@ -22,4 +22,22 @@ export const addBookAction = (form) => async (dispatch) => {
       return { status: result.status, message: result.message };
     }
   }
+};
+
+export const editBookAction = (form) => async (dispatch) => {
+  let refinedData = {
+    _id: form._id,
+    title: form.title,
+    author: form.author,
+    isbn: form.isbn,
+    genre: form.genre,
+    publishedYear: form.publishedYear.toString(),
+    description: form.description,
+    status: form.status,
+  };
+  const data = await editBook(refinedData);
+  if (data?.status) {
+    const result = await dispatch(getBookAction());
+  }
+  return { status: data.status, message: data.message };
 };

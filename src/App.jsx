@@ -12,7 +12,10 @@ import { useDispatch } from "react-redux";
 import { getUserDetails } from "./features/auth/authActions.js";
 import AddBook from "./pages/AddBook.jsx";
 import { Books } from "./pages/Books.jsx";
+import EditBook from "./pages/EditBook.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +29,7 @@ const App = () => {
   }, []);
   return (
     <>
+      <ToastContainer />
       <div className="wrapper">
         <Routes>
           <Route path="*" element={<DefaultLayout />}>
@@ -56,6 +60,14 @@ const App = () => {
               element={
                 <Auth>
                   <Books />
+                </Auth>
+              }
+            />
+            <Route
+              path="editbook"
+              element={
+                <Auth>
+                  <EditBook />
                 </Auth>
               }
             />

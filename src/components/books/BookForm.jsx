@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useForm from "../../hooks/form.js";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "../../App.css";
 import { addBookAction } from "../../features/book/bookActions.js";
 import { useDispatch } from "react-redux";
@@ -96,7 +96,6 @@ function BookForm() {
       >
         Add book
       </Button>
-      <ToastContainer />
     </Form>
   );
 }

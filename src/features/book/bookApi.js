@@ -17,3 +17,12 @@ export const getBooks = (filterObj) => {
     data: filterObj,
   });
 };
+
+export const editBook = (formData) => {
+  return apiProcessor({
+    method: "put",
+    url: `${apiUrl}/book`,
+    isPrivate: true,
+    data: formData,
+  });
+};

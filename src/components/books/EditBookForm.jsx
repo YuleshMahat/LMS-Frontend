@@ -1,10 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useForm from "../../hooks/form.js";
-import { toast, ToastContainer } from "react-toastify";
 import "../../App.css";
-import { addBookAction } from "../../features/book/bookActions.js";
+import { editBookAction } from "../../features/book/bookActions.js";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+
 function EditBookForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,12 +15,13 @@ function EditBookForm() {
   const { form, handleChange } = useForm(initialState);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(addBookAction(form));
+    const data = await dispatch(editBookAction(form));
+    console.log(data);
     if (data.status) {
-      toast["success"]("Added book successfully");
+      toast["success"]("Book updated successfully");
       navigate("/books");
     } else {
-      toast["error"](data?.message || "Error adding the book");
+      toast["error"](data?.message || "Error updating the book");
     }
   };
   return (
@@ -87,11 +90,23 @@ function EditBookForm() {
       <Button
         variant="primary"
         type="submit"
-        style={{ backgroundColor: "#3B38A0", border: "none" }}
+        style={{
+          backgroundColor: "#3B38A0",
+          border: "none",
+          marginRight: "5px",
+        }}
       >
-        Add book
+        Update
       </Button>
-      <ToastContainer />
+      <Button
+        variant="primary"
+        style={{ backgroundColor: "#625FBC", border: "none" }}
+        onClick={() => {
+          navigate("/books");
+        }}
+      >
+        Cancel
+      </Button>
     </Form>
   );
 }
