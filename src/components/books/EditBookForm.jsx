@@ -5,7 +5,7 @@ import "../../App.css";
 import { editBookAction } from "../../features/book/bookActions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 function EditBookForm() {
   const dispatch = useDispatch();
@@ -18,10 +18,11 @@ function EditBookForm() {
     const data = await dispatch(editBookAction(form));
     console.log(data);
     if (data.status) {
-      toast["success"]("Book updated successfully");
+      toast.success("Book updated successfully");
+      console.log("book updated successfully");
       navigate("/books");
     } else {
-      toast["error"](data?.message || "Error updating the book");
+      toast.error(data?.message || "Error updating the book");
     }
   };
   return (
