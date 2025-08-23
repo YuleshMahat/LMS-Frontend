@@ -14,7 +14,6 @@ import AddBook from "./pages/AddBook.jsx";
 import { Books } from "./pages/Books.jsx";
 import EditBook from "./pages/EditBook.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
@@ -29,7 +28,6 @@ const App = () => {
   }, []);
   return (
     <>
-      <ToastContainer />
       <div className="wrapper">
         <Routes>
           <Route path="*" element={<DefaultLayout />}>
@@ -74,6 +72,7 @@ const App = () => {
           </Route>
         </Routes>
       </div>
+      <ToastContainer />
     </>
   );
 };

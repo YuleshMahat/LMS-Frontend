@@ -26,3 +26,12 @@ export const editBook = (formData) => {
     data: formData,
   });
 };
+
+export const deleteBook = (id) => {
+  return apiProcessor({
+    method: "delete",
+    url: `${apiUrl}/book`,
+    isPrivate: true,
+    data: id,
+  });
+};

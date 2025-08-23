@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBookAction } from "../../features/book/bookActions.js";
 import { setSelectedBook } from "../../features/book/bookSlice.js";
 import { useNavigate } from "react-router-dom";
+import { deleteBook } from "../../features/book/bookApi.js";
+import { toast } from "react-toastify";
 
 function StripedRowExample() {
   const dispatch = useDispatch();
@@ -12,10 +14,17 @@ function StripedRowExample() {
 
   useEffect(() => {
     const result = dispatch(getBookAction());
-    if (!result.status) {
-      console.log(result.message);
-    }
   }, []);
+
+  const handleDelete = async (id) => {
+    const result = await deleteBook(id);
+    if (result?.status) {
+      toast.success("Book successfully deleted");
+      dispatch(getBookAction());
+    } else {
+      toast.error(toast.message);
+    }
+  };
 
   return (
     <Table striped>
@@ -53,7 +62,13 @@ function StripedRowExample() {
               >
                 Edit
               </button>
-              <button className="editButton" id="updateButton">
+              <button
+                className="editButton"
+                id="updateButton"
+                onClick={() => {
+                  handleDelete(book._id);
+                }}
+              >
                 Delete
               </button>
             </td>
