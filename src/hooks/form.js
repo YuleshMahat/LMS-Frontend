@@ -8,6 +8,9 @@ const useForm = (initial_state) => {
     handleChange: (e) => {
       setForm({ ...form, [e.target.name]: e.target.value });
     },
+    handleThumbnailChange: (e) => {
+      setForm({ ...form, [e.target.name]: e.target.files[0] });
+    },
   };
 };
 

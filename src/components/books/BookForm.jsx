@@ -14,11 +14,19 @@ function BookForm() {
     isbn: "",
     publishedYear: "",
     genre: "",
+    thumbnail: "",
   };
-  const { form, setForm, handleChange } = useForm(initialState);
+  const { form, setForm, handleChange, handleThumbnailChange } =
+    useForm(initialState);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(addBookAction(form));
+
+    let formData = new FormData();
+
+    Object.keys(form).forEach((key) => {
+      formData.append(key, form[key]);
+    });
+    const data = await dispatch(addBookAction(formData));
     if (data.status) {
       setForm(initialState);
       toast["success"]("Added book successfully");
@@ -36,6 +44,7 @@ function BookForm() {
           value={form.title}
           onChange={handleChange}
           name="title"
+          required
         />
       </Form.Group>
 
@@ -47,6 +56,7 @@ function BookForm() {
           onChange={handleChange}
           name="author"
           placeholder="Author"
+          required
         />
       </Form.Group>
       <Form.Group className="mb-3">
@@ -67,6 +77,7 @@ function BookForm() {
           value={form.isbn}
           onChange={handleChange}
           name="isbn"
+          required
         />
       </Form.Group>
       <Form.Group className="mb-3">
@@ -77,6 +88,7 @@ function BookForm() {
           value={form.publishedYear}
           onChange={handleChange}
           name="publishedYear"
+          required
         />
       </Form.Group>
       <Form.Group className="mb-3">
@@ -87,19 +99,34 @@ function BookForm() {
           value={form.genre}
           onChange={handleChange}
           name="genre"
+          required
+        />
+      </Form.Group>
+      <Form.Group controlId="formFile" className="mb-3">
+        <Form.Label>Image</Form.Label>
+        <Form.Control
+          type="file"
+          name="thumbnail"
+          onChange={handleThumbnailChange}
         />
       </Form.Group>
       <Button
         variant="primary"
         type="submit"
-        style={{ backgroundColor: "#3B38A0", border: "none" }}
+        style={{
+          backgroundColor: "#3B38A0",
+          border: "none",
+          marginRight: "10px",
+        }}
       >
         Add book
       </Button>
-      <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Default file input example</Form.Label>
-        <Form.Control type="file" />
-      </Form.Group>
+      <Button
+        variant="primary"
+        style={{ backgroundColor: "#6e6bd6ff", border: "none" }}
+      >
+        Cancel
+      </Button>
     </Form>
   );
 }

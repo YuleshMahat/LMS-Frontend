@@ -9,6 +9,7 @@ export const apiProcessor = async ({
   url,
   isPrivate,
   isRefresh = false,
+  contentType = "application/json",
 }) => {
   try {
     let response = await axios({
@@ -18,6 +19,7 @@ export const apiProcessor = async ({
       headers: isPrivate
         ? {
             Authorization: isRefresh ? getToken("refresh") : getToken("access"),
+            "Content-Type": contentType,
           }
         : {},
     });
@@ -25,8 +27,7 @@ export const apiProcessor = async ({
     return response.data;
   } catch (err) {
     console.log("catch block of api processor.");
-    console.log(err.response.data.message);
-    if (err?.response?.data?.message.trim().includes("Expired access token")) {
+    if (err?.response?.data?.message?.includes("Expired access token")) {
       console.log("Inside if block of catch");
       const data = await regenerateAccessToken();
 

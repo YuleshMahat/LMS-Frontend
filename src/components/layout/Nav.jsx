@@ -6,6 +6,8 @@ import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { FaBook } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { InputGroup, Form } from "react-bootstrap";
+import { IoIosSearch } from "react-icons/io";
 
 const Navigation = () => {
   const { userData } = useSelector((state) => state.userStore);
@@ -28,6 +30,19 @@ const Navigation = () => {
           </Box>
         </Link>
       </Box>
+      <Box className="searchBar">
+        <InputGroup>
+          <Form.Control
+            placeholder="Search"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
+          <InputGroup.Text id="basic-addon1">
+            <IoIosSearch />
+          </InputGroup.Text>
+        </InputGroup>
+      </Box>
+
       <Box sx={{ display: "flex", gap: "1rem", alignItems: "center" }}>
         <Link
           component={RouterLink}

@@ -6,16 +6,9 @@ const DefaultLayout = () => {
   return (
     <div className="pageLayout">
       <Nav />
-      <main
-        style={{
-          flexGrow: 1,
-          flexDirection: "column",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+      <div className="outlet">
         <Outlet />
-      </main>
+      </div>
     </div>
   );
 };

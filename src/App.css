@@ -1,6 +1,11 @@
 .pageLayout {
-  display: "flex";
-  flex-direction: "column";
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.outlet {
+  flex-grow: 1;
 }
 
 .dashboardLayout {
@@ -82,4 +87,68 @@ body {
 #updateButton {
   background-color: rgb(247, 60, 60);
   margin-right: 0;
+}
+
+.searchBar {
+  width: 30vw;
+}
+
+.navLinks {
+  display: "flex";
+  align-items: "center";
+  gap: "0.35rem";
+}
+
+.carousel {
+  height: 80vh;
+}
+
+.carouselImages {
+  max-height: 80vh;
+  width: 100%;
+}
+
+.featureTitle {
+  display: flex;
+  align-items: center;
+}
+
+.featureTitleHeading {
+  font-weight: 500;
+  font-family: Helvetica;
+  white-space: nowrap;
+}
+
+.bookFeature {
+  padding: 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  flex-grow: 1;
+  background-color: rgb(49, 49, 49);
+  height: 1.4px;
+  margin-left: 1rem;
+}
+
+/* BookComp CSS */
+
+.bookComp {
+  width: 400px;
+  padding: 50px;
+}
+
+.featureImage {
+  width: 100%;
+}
+
+#bookTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.books {
+  display: flex;
+  flex-direction: row;
 }

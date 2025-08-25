@@ -6,6 +6,7 @@ export const addNewBook = (obj) => {
     url: `${apiUrl}/book/`,
     data: obj,
     isPrivate: true,
+    contentType: "multipart/form-data",
   });
 };
 
@@ -32,6 +33,13 @@ export const deleteBook = (id) => {
     method: "delete",
     url: `${apiUrl}/book`,
     isPrivate: true,
-    data: id,
+    data: { id },
+  });
+};
+
+export const getAllBooks = () => {
+  return apiProcessor({
+    method: "get",
+    url: `${apiUrl}/book/pub-books`,
   });
 };

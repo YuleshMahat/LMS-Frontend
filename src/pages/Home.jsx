@@ -1,7 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import Carousel from "react-bootstrap/Carousel";
+import BookFeature from "../components/home/BookFeature.jsx";
 
 const Home = () => {
-  return <div>Home</div>;
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
+  return (
+    <>
+      <Carousel
+        activeIndex={index}
+        onSelect={handleSelect}
+        className="carousel"
+      >
+        <Carousel.Item>
+          <img
+            src="/images/image1.jpg"
+            alt="First slide"
+            className="carouselImages"
+          />
+          <Carousel.Caption>
+            <h3>Burrow with us!</h3>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            src="/images/image2.jpg"
+            alt="Second slide"
+            className="carouselImages"
+          />
+          <Carousel.Caption>
+            <h3>Learn with us!</h3>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            src="/images/image3.jpg"
+            alt="Third slide"
+            className="carouselImages"
+          />
+          <Carousel.Caption>
+            <h3>Grow with us!</h3>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+      <BookFeature title="Recent Books" />
+    </>
+  );
 };
 
 export default Home;

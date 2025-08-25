@@ -28,50 +28,48 @@ const App = () => {
   }, []);
   return (
     <>
-      <div className="wrapper">
-        <Routes>
-          <Route path="*" element={<DefaultLayout />}>
-            <Route path="" element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="verify-email" element={<Verify />} />
-          </Route>
-          <Route path="*" element={<DashboardLayout />}>
-            <Route
-              path="dashboard"
-              element={
-                <Auth>
-                  <Dashboard />
-                </Auth>
-              }
-            />
-            <Route
-              path="addBook"
-              element={
-                <Auth>
-                  <AddBook />
-                </Auth>
-              }
-            />
-            <Route
-              path="books"
-              element={
-                <Auth>
-                  <Books />
-                </Auth>
-              }
-            />
-            <Route
-              path="editbook"
-              element={
-                <Auth>
-                  <EditBook />
-                </Auth>
-              }
-            />
-          </Route>
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<DefaultLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="verify-email" element={<Verify />} />
+        </Route>
+        <Route path="*" element={<DashboardLayout />}>
+          <Route
+            path="dashboard"
+            element={
+              <Auth>
+                <Dashboard />
+              </Auth>
+            }
+          />
+          <Route
+            path="addBook"
+            element={
+              <Auth>
+                <AddBook />
+              </Auth>
+            }
+          />
+          <Route
+            path="books"
+            element={
+              <Auth>
+                <Books />
+              </Auth>
+            }
+          />
+          <Route
+            path="editbook"
+            element={
+              <Auth>
+                <EditBook />
+              </Auth>
+            }
+          />
+        </Route>
+      </Routes>
       <ToastContainer />
     </>
   );

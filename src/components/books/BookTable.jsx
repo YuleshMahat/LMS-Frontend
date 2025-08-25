@@ -66,6 +66,7 @@ function StripedRowExample() {
                 className="editButton"
                 id="updateButton"
                 onClick={() => {
+                  console.log(book);
                   handleDelete(book._id);
                 }}
               >
