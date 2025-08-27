@@ -146,9 +146,33 @@ body {
 #bookTitle {
   font-size: 1.3rem;
   font-weight: 600;
+  text-decoration: none;
+  color: inherit;
 }
 
 .books {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* book detail page css */
+.bookContainer {
+  margin: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.bookDetailCover {
+  object-fit: cover;
+  height: 450px;
+  width: 350px;
+}
+
+.bookDetails {
+  display: flex;
+  flex-direction: column;
+  max-width: 50vw;
+  justify-content: space-around;
 }

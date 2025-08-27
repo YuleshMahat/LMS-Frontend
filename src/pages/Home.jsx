@@ -46,7 +46,7 @@ const Home = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      <BookFeature title="Recent Books" />
+      <BookFeature heading="Recent Books" />
     </>
   );
 };

@@ -1,8 +1,8 @@
 // import { useDispatch } from "react-redux";
 // useDispatch is a hook and a hook cannot be used outside of react component
 // we are passing in dispatch function as an argument thats why we need the thunk pattern
-import { setBooks } from "./bookSlice.js";
-import { addNewBook, getBooks, editBook } from "./bookApi.js";
+import { setBooks, setPublicBooks } from "./bookSlice.js";
+import { addNewBook, getBooks, editBook, getAllBooks } from "./bookApi.js";
 
 export const getBookAction = () => async (dispatch) => {
   const data = await getBooks({});
@@ -11,6 +11,14 @@ export const getBookAction = () => async (dispatch) => {
     return { status: data.status, message: data.message };
   } else {
     console.log("Error fetching books from the databases");
+  }
+};
+
+export const getPublicBooksAction = () => async (dispatch) => {
+  const data = await getAllBooks();
+  if (data?.status) {
+    dispatch(setPublicBooks(data.books));
+    return { status: data.status, message: data.message };
   }
 };
 

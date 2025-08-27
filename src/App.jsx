@@ -15,6 +15,9 @@ import { Books } from "./pages/Books.jsx";
 import EditBook from "./pages/EditBook.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from "react-toastify";
+import { getAllBooks } from "./features/book/bookApi.js";
+import { getPublicBooksAction } from "./features/book/bookActions.js";
+import BookDetail from "./pages/BookDetail.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,9 +25,14 @@ const App = () => {
     let data = await dispatch(getUserDetails());
   };
 
+  const getPublicBooks = async () => {
+    let data = await dispatch(getPublicBooksAction());
+  };
+
   useEffect(() => {
     console.log("APP");
     autoLogin();
+    getPublicBooks();
   }, []);
   return (
     <>
@@ -34,6 +42,7 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="verify-email" element={<Verify />} />
+          <Route path="book-detail/:bookId" element={<BookDetail />} />
         </Route>
         <Route path="*" element={<DashboardLayout />}>
           <Route
