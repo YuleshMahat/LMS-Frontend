@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../App.css";
 import { Divider, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -12,9 +12,61 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "@mui/material";
 import { IoBookSharp } from "react-icons/io5";
+import { IoIosBriefcase } from "react-icons/io";
 
 const AdminModuleBar = () => {
   const { userData } = useSelector((state) => state.userStore);
+  const menuOptions = [
+    {
+      link: "/dashboard",
+      label: "Dashboard",
+      icon: <MdSpaceDashboard />,
+      isAdmin: false,
+    },
+    {
+      link: "/books",
+      label: "Books",
+      icon: <FaBook />,
+      isAdmin: false,
+    },
+    { link: "/users", label: "Users", icon: <PiUsers />, isAdmin: true },
+    { link: "/admins", label: "Admins", icon: <RiAdminFill />, isAdmin: true },
+    {
+      link: "/borrows",
+      label: "Borrows",
+      icon: <PiBooks />,
+      isAdmin: true,
+    },
+    {
+      link: "/my-borrows",
+      label: "My Borrows",
+      icon: <IoIosBriefcase />,
+      isAdmin: false,
+    },
+    {
+      link: "/reviews",
+      label: "Reviews",
+      icon: <MdOutlineReviews />,
+      isAdmin: true,
+    },
+    {
+      link: "/profile",
+      label: "Profile",
+      icon: <IoPerson />,
+      isAdmin: false,
+    },
+  ];
+
+  const [filteredMenuOptions, setFilteredMenuOptions] = useState();
+  //use Effect to load correct menuOptions
+  useEffect(() => {
+    const tempMenuOptions = menuOptions.filter(
+      (option) => userData._id == "admin" || !option.isAdmin
+    );
+    console.log(111, tempMenuOptions);
+    setFilteredMenuOptions(tempMenuOptions);
+  }, []);
+
   return (
     <div className="moduleBar">
       <IoBookSharp size={80} />
@@ -23,41 +75,21 @@ const AdminModuleBar = () => {
       </Typography>
       <Divider sx={{ border: "solid white 2px", width: "100%", my: 1 }} />
       <ul className="moduleOptions">
-        <li>
-          <MdSpaceDashboard />
-          Dashboard
-        </li>
-        <li>
-          <FaBook />
-          <Link
-            component={RouterLink}
-            to="/books"
-            underline="none"
-            color="white"
-          >
-            Books
-          </Link>
-        </li>
-        <li>
-          <PiUsers />
-          Users
-        </li>
-        <li>
-          <RiAdminFill />
-          Admins
-        </li>
-        <li>
-          <PiBooks />
-          Borrows
-        </li>
-        <li>
-          <MdOutlineReviews />
-          Reviews
-        </li>
-        <li>
-          <IoPerson />
-          Profile
-        </li>
+        {filteredMenuOptions.map((option) => {
+          return (
+            <li>
+              {option.icon}{" "}
+              <Link
+                component={RouterLink}
+                to={option.link}
+                underline="none"
+                color="white"
+              >
+                {option.label}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
