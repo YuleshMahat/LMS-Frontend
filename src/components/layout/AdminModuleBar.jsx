@@ -38,7 +38,7 @@ const AdminModuleBar = () => {
       isAdmin: true,
     },
     {
-      link: "/my-borrows",
+      link: "/myBorrows",
       label: "My Borrows",
       icon: <IoIosBriefcase />,
       isAdmin: false,

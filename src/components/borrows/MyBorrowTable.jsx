@@ -3,13 +3,17 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getBorrowBookAction } from "../../features/borrow/borrowAction";
 
-const BorrowTable = () => {
+const MyBorrowTable = () => {
   const { borrows } = useSelector((state) => state.borrowStore);
+  const { userData } = useSelector((state) => state.userStore);
   const dispatch = useDispatch();
+  const [myBorrows, setMyBorrows] = useState([]);
   useEffect(() => {
-    console.log("use effect used");
-    const data = dispatch(getBorrowBookAction());
-    console.log(111, data);
+    dispatch(getBorrowBookAction());
+    const tempBorrows = borrows.filter(
+      (borrows) => userData._id == borrows.userId
+    );
+    setMyBorrows(tempBorrows);
   }, []);
 
   return (
@@ -62,4 +66,4 @@ const BorrowTable = () => {
   );
 };
 
-export default BorrowTable;
+export default MyBorrowTable;

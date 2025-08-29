@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  burrows: [],
+  borrows: [],
 };
 
 const borrowSlice = createSlice({
@@ -9,7 +9,7 @@ const borrowSlice = createSlice({
   initialState,
   reducers: {
     setBorrows: (state, action) => {
-      state.burrows = action.payload;
+      state.borrows = action.payload;
     },
   },
 });

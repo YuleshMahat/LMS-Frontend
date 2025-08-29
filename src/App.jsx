@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import { getPublicBooksAction } from "./features/book/bookActions.js";
 import BookDetail from "./pages/BookDetail.jsx";
 import Borrows from "./pages/Borrows.jsx";
+import MyBorrows from "./pages/MyBorrows.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -81,6 +82,14 @@ const App = () => {
             element={
               <Auth>
                 <EditBook />
+              </Auth>
+            }
+          />
+          <Route
+            path="myBorrows"
+            element={
+              <Auth>
+                <MyBorrows />
               </Auth>
             }
           />
