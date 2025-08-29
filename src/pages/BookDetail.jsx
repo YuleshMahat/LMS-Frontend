@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { borrowBookAction } from "../features/borrow/borrowAction";
+import { toast } from "react-toastify";
 
 const BookDetail = () => {
   const dispatch = useDispatch();
@@ -27,21 +28,29 @@ const BookDetail = () => {
         <p>ISBN: {book?.isbn}</p>
         <p>Published Year: {book?.publishedYear}</p>
         <p>Average Rating: {book?.averageRating}</p>
-        <button
-          className="btn"
-          style={{ backgroundColor: "#5b57c2", color: "white" }}
-          onClick={() => {
-            dispatch(
-              borrowBookAction({
-                bookId: book?._id,
-                title: book?.title,
-                thumbnail: book?.thumbnail,
-              })
-            );
-          }}
-        >
-          Borrow
-        </button>
+        {book?.availability ? (
+          <button
+            className="btn"
+            style={{ backgroundColor: "#5b57c2", color: "white" }}
+            onClick={async () => {
+              const data = await dispatch(
+                borrowBookAction({
+                  bookId: book?._id,
+                  title: book?.title,
+                  thumbnail: book?.thumbnail,
+                })
+              );
+              console.log(data);
+              toast[data.status ? "success" : "error"](data.message);
+            }}
+          >
+            Borrow
+          </button>
+        ) : (
+          <button className="btn btn-outline-secondary" disabled>
+            {book?.expectedAvailable}
+          </button>
+        )}
       </div>
     </div>
   );

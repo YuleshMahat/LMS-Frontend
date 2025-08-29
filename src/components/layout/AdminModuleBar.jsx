@@ -27,7 +27,7 @@ const AdminModuleBar = () => {
       link: "/books",
       label: "Books",
       icon: <FaBook />,
-      isAdmin: false,
+      isAdmin: true,
     },
     { link: "/users", label: "Users", icon: <PiUsers />, isAdmin: true },
     { link: "/admins", label: "Admins", icon: <RiAdminFill />, isAdmin: true },
@@ -57,13 +57,12 @@ const AdminModuleBar = () => {
     },
   ];
 
-  const [filteredMenuOptions, setFilteredMenuOptions] = useState();
+  const [filteredMenuOptions, setFilteredMenuOptions] = useState([]);
   //use Effect to load correct menuOptions
   useEffect(() => {
     const tempMenuOptions = menuOptions.filter(
-      (option) => userData._id == "admin" || !option.isAdmin
+      (option) => userData.role == "admin" || !option.isAdmin
     );
-    console.log(111, tempMenuOptions);
     setFilteredMenuOptions(tempMenuOptions);
   }, []);
 
@@ -75,9 +74,9 @@ const AdminModuleBar = () => {
       </Typography>
       <Divider sx={{ border: "solid white 2px", width: "100%", my: 1 }} />
       <ul className="moduleOptions">
-        {filteredMenuOptions.map((option) => {
+        {filteredMenuOptions.map((option, index) => {
           return (
-            <li>
+            <li key={index}>
               {option.icon}{" "}
               <Link
                 component={RouterLink}

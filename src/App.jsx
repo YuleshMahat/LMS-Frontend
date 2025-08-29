@@ -15,9 +15,9 @@ import { Books } from "./pages/Books.jsx";
 import EditBook from "./pages/EditBook.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from "react-toastify";
-import { getAllBooks } from "./features/book/bookApi.js";
 import { getPublicBooksAction } from "./features/book/bookActions.js";
 import BookDetail from "./pages/BookDetail.jsx";
+import Borrows from "./pages/Borrows.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log("APP");
     autoLogin();
     getPublicBooks();
   }, []);
@@ -45,6 +44,14 @@ const App = () => {
           <Route path="book-detail/:bookId" element={<BookDetail />} />
         </Route>
         <Route path="*" element={<DashboardLayout />}>
+          <Route
+            path="borrows"
+            element={
+              <Auth>
+                <Borrows />
+              </Auth>
+            }
+          />
           <Route
             path="dashboard"
             element={

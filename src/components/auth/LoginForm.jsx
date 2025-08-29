@@ -10,7 +10,6 @@ function BasicExample() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
   const initialState = { email: "", password: "" };
   const { form, handleChange } = useForm(initialState);
   async function handleSubmit(e) {
