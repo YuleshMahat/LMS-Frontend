@@ -5,11 +5,13 @@ import { Box } from "@mui/material";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { FaBook } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form } from "react-bootstrap";
 import { IoIosSearch } from "react-icons/io";
+import { logoutAction } from "../../features/auth/authActions";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.userStore);
   return (
     <Box
@@ -44,28 +46,44 @@ const Navigation = () => {
       </Box>
 
       <Box sx={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-        <Link
-          component={RouterLink}
-          to="/login"
-          underline="none"
-          color="inherit"
-        >
-          <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-            <IoPerson />
-            {userData?._id ? userData.fName : "Login"}
-          </Box>
-        </Link>
-        <Link
-          component={RouterLink}
-          to="/register"
-          underline="none"
-          color="inherit"
-        >
-          <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-            <GrLogin />
-            {userData?._id ? "Logout" : "Register"}
-          </Box>
-        </Link>
+        <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <IoPerson />
+          {userData?._id ? (
+            <span>{userData.fName}</span>
+          ) : (
+            <Link
+              component={RouterLink}
+              to="/login"
+              underline="none"
+              color="inherit"
+            >
+              <span>Login</span>
+            </Link>
+          )}
+        </Box>
+
+        <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <GrLogin />
+          {userData?._id ? (
+            <span
+              onClick={() => {
+                dispatch(logoutAction());
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              Logout
+            </span>
+          ) : (
+            <Link
+              component={RouterLink}
+              to="/register"
+              underline="none"
+              color="inherit"
+            >
+              <span>Register</span>
+            </Link>
+          )}
+        </Box>
       </Box>
     </Box>
   );

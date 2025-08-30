@@ -1,6 +1,6 @@
 import { loginUser } from "../../services/apiProcessor.js";
 import { storeToken } from "../../services/storageFunctions.js";
-import { setUserData } from "../../features/auth/authSlice.js";
+import { clearUserData, setUserData } from "../../features/auth/authSlice.js";
 import { fetchUserDetails } from "../users/userAPI.js";
 
 export const getUserDetails = () => async (dispatch) => {
@@ -20,4 +20,8 @@ export const loginUserAction = (form) => async (dispatch) => {
   }
 
   return { status: data.status, message: data.message };
+};
+
+export const logoutAction = () => async (dispatch) => {
+  dispatch(clearUserData());
 };

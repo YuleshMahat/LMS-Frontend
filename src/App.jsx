@@ -19,6 +19,7 @@ import { getPublicBooksAction } from "./features/book/bookActions.js";
 import BookDetail from "./pages/BookDetail.jsx";
 import Borrows from "./pages/Borrows.jsx";
 import MyBorrows from "./pages/MyBorrows.jsx";
+import Review from "./pages/Review.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,14 @@ const App = () => {
             element={
               <Auth>
                 <MyBorrows />
+              </Auth>
+            }
+          />
+          <Route
+            path="review/:borrowId"
+            element={
+              <Auth>
+                <Review />
               </Auth>
             }
           />

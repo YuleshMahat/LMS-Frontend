@@ -7,9 +7,7 @@ const BorrowTable = () => {
   const { borrows } = useSelector((state) => state.borrowStore);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("use effect used");
-    const data = dispatch(getBorrowBookAction());
-    console.log(111, data);
+    dispatch(getBorrowBookAction());
   }, []);
 
   return (

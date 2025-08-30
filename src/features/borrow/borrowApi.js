@@ -18,3 +18,12 @@ export const getBorrowedBookApi = async () => {
   });
   return result;
 };
+
+export const returnBookApi = async (borrowId) => {
+  const result = await apiProcessor({
+    method: "post",
+    url: `${apiUrl}/borrow/${borrowId}`,
+    isPrivate: true,
+  });
+  return result;
+};
