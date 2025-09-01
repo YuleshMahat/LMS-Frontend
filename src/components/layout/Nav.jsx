@@ -3,7 +3,7 @@ import { GrLogin } from "react-icons/gr";
 import { IoPerson } from "react-icons/io5";
 import { Box } from "@mui/material";
 import { Link } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { FaBook } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form } from "react-bootstrap";
@@ -12,6 +12,7 @@ import { logoutAction } from "../../features/auth/authActions";
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userData } = useSelector((state) => state.userStore);
   return (
     <Box
@@ -24,6 +25,7 @@ const Navigation = () => {
         color: "white",
       }}
     >
+      {/* Brand and logo */}
       <Box>
         <Link component={RouterLink} to="/" underline="none" color="inherit">
           <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
@@ -32,6 +34,8 @@ const Navigation = () => {
           </Box>
         </Link>
       </Box>
+
+      {/* Search Bar */}
       <Box className="searchBar">
         <InputGroup>
           <Form.Control
@@ -45,7 +49,34 @@ const Navigation = () => {
         </InputGroup>
       </Box>
 
+      {/* Menu Options */}
       <Box sx={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+        {/* Public Books */}
+        <Box
+          sx={{ display: "flex", alignItems: "center" }}
+          onClick={() => {
+            console.log("books buttoned clicked");
+            navigate("/pub-books");
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          Books
+        </Box>
+
+        {/* Dashboard */}
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          {userData?._id && (
+            <span
+              onClick={() => {
+                navigate("/dashboard");
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              Dashboard
+            </span>
+          )}
+        </Box>
+
         <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
           <IoPerson />
           {userData?._id ? (

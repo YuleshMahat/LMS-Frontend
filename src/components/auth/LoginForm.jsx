@@ -17,7 +17,6 @@ function BasicExample() {
     try {
       const result = await dispatch(loginUserAction({ ...form }));
       if (result?.status) {
-        navigate("/dashboard");
         toast.success("Login Successful");
       } else {
         toast.error("Username or password incorrect");
@@ -27,10 +26,10 @@ function BasicExample() {
       alert("An error occured during loggin in");
     }
   }
-
+  console.log(111, location);
   const { userData } = useSelector((store) => store.userStore);
-  let previousLocation = location?.state?.from.pathname || "/dashboard";
-
+  let previousLocation = location?.state?.from?.pathname || "/dashboard";
+  console.log(222, previousLocation);
   useEffect(() => {
     userData?._id && navigate(previousLocation);
   }, [userData?._id]);

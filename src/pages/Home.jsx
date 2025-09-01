@@ -37,7 +37,7 @@ const Home = () => {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            src="/images/image3.jpg"
+            src="https://images.pexels.com/photos/2099266/pexels-photo-2099266.jpeg"
             alt="Third slide"
             className="carouselImages"
           />
@@ -47,6 +47,8 @@ const Home = () => {
         </Carousel.Item>
       </Carousel>
       <BookFeature heading="Recent Books" />
+      <BookFeature heading="Most Read" />
+      <BookFeature heading="Recommended" />
     </>
   );
 };

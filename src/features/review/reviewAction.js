@@ -1,5 +1,5 @@
-import { submitReviewApi, getReviewApi } from "./reviewApi";
-import { setReviews } from "./reviewSlice";
+import { submitReviewApi, getReviewApi } from "./reviewApi.js";
+import { setReviews } from "./reviewSlice.js";
 
 export const submitReviewAction = (borrowObj) => async (dispatch) => {
   const data = await submitReviewApi(borrowObj);

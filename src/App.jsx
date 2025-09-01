@@ -20,6 +20,7 @@ import BookDetail from "./pages/BookDetail.jsx";
 import Borrows from "./pages/Borrows.jsx";
 import MyBorrows from "./pages/MyBorrows.jsx";
 import Review from "./pages/Review.jsx";
+import PubBooks from "./pages/PubBooks.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,8 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="verify-email" element={<Verify />} />
-          <Route path="book-detail/:bookId" element={<BookDetail />} />
+          <Route path="book-detail/:slug" element={<BookDetail />} />
+          <Route path="pub-books" element={<PubBooks />} />
         </Route>
         <Route path="*" element={<DashboardLayout />}>
           <Route

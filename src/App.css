@@ -48,6 +48,11 @@
   flex-direction: column;
 }
 
+#link {
+  text-decoration: none;
+  color: inherit;
+}
+
 main,
 body {
   margin: 0;
@@ -106,6 +111,7 @@ body {
 .carouselImages {
   max-height: 80vh;
   width: 100%;
+  object-fit: cover;
 }
 
 .featureTitle {
@@ -123,6 +129,8 @@ body {
   padding: 1rem 3rem;
   display: flex;
   flex-direction: column;
+  margin-top: 2.5rem;
+  gap: 1.5rem;
 }
 
 .line {
@@ -136,18 +144,19 @@ body {
 
 .bookComp {
   width: 400px;
-  padding: 50px;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  flex-grow: 1;
 }
 
 .featureImage {
   width: 100%;
 }
 
-#bookTitle {
+.bookTitle {
   font-size: 1.3rem;
   font-weight: 600;
-  text-decoration: none;
-  color: inherit;
 }
 
 .books {
@@ -155,13 +164,15 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+  gap: 2rem;
 }
 
 /* book detail page css */
 .bookContainer {
-  margin: 1rem;
+  margin: 2rem 5rem;
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 5rem;
 }
 
 .bookDetailCover {
@@ -175,6 +186,29 @@ body {
   flex-direction: column;
   max-width: 50vw;
   justify-content: space-around;
+}
+
+.bookOption {
+  background-color: rgba(164, 162, 162, 0.479);
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.optionSelected {
+  background-color: rgba(164, 162, 162, 0.479) !important;
+  border: none !important;
+  color: black !important;
+}
+
+.optionNotSelected {
+  background-color: #625fbc !important;
+  border: none !important;
+}
+
+.moreDetails {
+  padding: 1rem;
+  border: 1px solid grey;
+  border-radius: 10px;
 }
 
 /* review form css */

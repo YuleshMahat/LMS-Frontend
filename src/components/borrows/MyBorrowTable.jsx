@@ -16,11 +16,13 @@ const MyBorrowTable = () => {
   const [myBorrows, setMyBorrows] = useState([]);
   useEffect(() => {
     dispatch(getBorrowBookAction());
+  }, []);
+  useEffect(() => {
     const tempBorrows = borrows.filter(
       (borrows) => userData._id == borrows.userId
     );
     setMyBorrows(tempBorrows);
-  }, []);
+  }, [borrows]);
 
   return (
     <div>
