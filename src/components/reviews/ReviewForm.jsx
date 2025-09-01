@@ -6,6 +6,7 @@ import { submitReviewAction } from "../../features/review/reviewAction.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getBorrowBookAction } from "../../features/borrow/borrowAction.js";
+import { toast } from "react-toastify";
 
 function ReviewForm() {
   const { borrows } = useSelector((state) => state.borrowStore);
@@ -28,6 +29,7 @@ function ReviewForm() {
         title: borrowedBook.title,
       })
     );
+    toast[data?.status ? "success" : "error"](data.message);
   };
 
   useEffect(() => {
@@ -49,6 +51,7 @@ function ReviewForm() {
               max={5}
               defaultValue={1}
               name="rating"
+              onChange={handleChange}
             />
           </Form.Group>
 

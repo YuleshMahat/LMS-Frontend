@@ -6,9 +6,9 @@ import Col from "react-bootstrap/Col";
 const ReviewComp = ({ username, message, rating }) => {
   return (
     <Container>
-      <Row>
+      <Row className="bookReviewComp">
         <Col xs={2}>Profile Image</Col>
-        <Col xs={10} className="d-flex flex-column">
+        <Col xs={10} className="d-flex flex-column ">
           <h4>{username}</h4>
           <p>{rating}</p>
           <p>{message}</p>

@@ -222,3 +222,10 @@ body {
 .reviewForm Form {
   width: 30vw;
 }
+
+/* review component css */
+.bookReviewComp {
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+}
