@@ -27,3 +27,13 @@ export const returnBookApi = async (borrowId) => {
   });
   return result;
 };
+
+export const updateBorrowBookApi = async (updateObj) => {
+  const result = await apiProcessor({
+    method: "patch",
+    url: `${apiUrl}/borrow/`,
+    isPrivate: true,
+    data: updateObj,
+  });
+  return result;
+};

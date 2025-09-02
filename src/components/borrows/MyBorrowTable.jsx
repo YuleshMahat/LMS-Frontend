@@ -7,16 +7,22 @@ import {
   getBorrowBookAction,
   returnBookAction,
 } from "../../features/borrow/borrowAction";
+import ReviewModal from "../reviews/reviewModal";
 
 const MyBorrowTable = () => {
   const { borrows } = useSelector((state) => state.borrowStore);
   const { userData } = useSelector((state) => state.userStore);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
   const [myBorrows, setMyBorrows] = useState([]);
+
   useEffect(() => {
     dispatch(getBorrowBookAction());
   }, []);
+
   useEffect(() => {
     const tempBorrows = borrows.filter(
       (borrows) => userData._id == borrows.userId
@@ -24,8 +30,16 @@ const MyBorrowTable = () => {
     setMyBorrows(tempBorrows);
   }, [borrows]);
 
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   return (
     <div>
+      <ReviewModal
+        showModal={showModal}
+        handleShow={handleShow}
+        handleClose={handleClose}
+      />
       <Table striped>
         <thead>
           <tr>
@@ -57,15 +71,12 @@ const MyBorrowTable = () => {
                   >
                     Return
                   </button>
-                ) : (
-                  <button
-                    className="btn btn-warning"
-                    onClick={() => {
-                      navigate("/review/" + book._id);
-                    }}
-                  >
+                ) : book?.status == "returned" ? (
+                  <button className="btn btn-warning" onClick={handleShow}>
                     Review
                   </button>
+                ) : (
+                  "Reviewed"
                 )}
               </td>
             </tr>

@@ -1,40 +1,55 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useForm from "../../hooks/form.js";
 import { submitReviewAction } from "../../features/review/reviewAction.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getBorrowBookAction } from "../../features/borrow/borrowAction.js";
+import {
+  getBorrowBookAction,
+  updateBorrowAction,
+} from "../../features/borrow/borrowAction.js";
 import { toast } from "react-toastify";
 
 function ReviewForm() {
   const { borrows } = useSelector((state) => state.borrowStore);
   const [borrowedBook, setBorrowedBook] = useState({});
+  const navigate = useNavigate();
   const { borrowId } = useParams();
   const dispatch = useDispatch();
   const initialState = { rating: 1, message: "" };
   const { form, handleChange } = useForm(initialState);
 
-  useEffect(() => {
-    dispatch(getBorrowBookAction());
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    //submit review first
+
     const data = dispatch(
       submitReviewAction({
         bookId: borrowedBook?.bookId,
         ...form,
-        title: borrowedBook.title,
+        title: borrowedBook?.title,
       })
     );
-    toast[data?.status ? "success" : "error"](data.message);
+    //update borrow status if review is successful
+    if (data.status) {
+      dispatch(
+        updateBorrowAction({ _id: borrowedBook._id, status: "reviewed" })
+      );
+      toast[data?.status ? "success" : "error"](data.message);
+      navigate("/myBorrows");
+    }
   };
 
+  //get borrowed books first.
+  useEffect(() => {
+    dispatch(getBorrowBookAction());
+  }, []);
+
+  //another use effect to prevent loop, depend on borrows to set borrowed books
   useEffect(() => {
     const tempBorrow = borrows.find((borrow) => borrow._id == borrowId);
-    console.log(borrows);
     setBorrowedBook(tempBorrow);
   }, [borrows]);
   return (
