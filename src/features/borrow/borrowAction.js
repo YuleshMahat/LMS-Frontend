@@ -6,6 +6,7 @@ import {
 } from "./borrowApi.js";
 import { setBorrows } from "./borrowSlice.js";
 import { getPublicBooksAction } from "../book/bookActions.js";
+import { toast } from "react-toastify";
 
 export const borrowBookAction = (borrowObj) => async (dispatch) => {
   const data = await borrowBookApi(borrowObj);
@@ -33,5 +34,6 @@ export const returnBookAction = (borrowId) => async (dispatch) => {
   const data = await returnBookApi(borrowId);
   dispatch(getBorrowBookAction());
   dispatch(getPublicBooksAction());
+  toast[data.status ? "success" : "error"](data.message);
   return { status: data.status, message: data.message };
 };

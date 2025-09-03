@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ReviewComp from "../components/reviews/ReviewComp";
+import { getApprovedReviewsAction } from "../features/review/reviewAction";
 
 const BookDetail = () => {
   const { userData } = useSelector((state) => state.userStore);
@@ -15,6 +16,7 @@ const BookDetail = () => {
   const { slug } = useParams();
   const { publicBooks } = useSelector((state) => state.bookStore);
   const [book, setBook] = useState({});
+  const [reviews, setReviews] = useState([]);
   const [selectedOption, setSelectedOption] = useState("description");
   const { approvedReviews } = useSelector((state) => state.reviewStore);
 
@@ -26,6 +28,13 @@ const BookDetail = () => {
     const searchBook = publicBooks.find((book) => book.slug == slug);
     setBook(searchBook);
   }, [publicBooks]);
+  useEffect(() => {
+    dispatch(getApprovedReviewsAction());
+  }, [book]);
+  useEffect(() => {
+    setReviews(approvedReviews);
+  }, [approvedReviews]);
+
   return (
     <div className="bookContainer">
       <div className="d-flex flex-row" style={{ gap: "8rem" }}>
@@ -104,15 +113,11 @@ const BookDetail = () => {
           </Button>
         </ButtonGroup>
         <div className="bookOption">
-          {selectedOption === "description" ? (
-            book?.description
-          ) : (
-            <ReviewComp
-              username="Yulesh Mahat"
-              rating="4.5"
-              message="very nice book"
-            />
-          )}
+          {selectedOption === "description"
+            ? book?.description
+            : reviews.map((review) => (
+                <ReviewComp username="" rating="4.5" message="very nice book" />
+              ))}
         </div>
       </div>
     </div>

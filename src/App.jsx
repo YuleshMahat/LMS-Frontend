@@ -19,8 +19,8 @@ import { getPublicBooksAction } from "./features/book/bookActions.js";
 import BookDetail from "./pages/BookDetail.jsx";
 import Borrows from "./pages/Borrows.jsx";
 import MyBorrows from "./pages/MyBorrows.jsx";
-import Review from "./pages/Review.jsx";
 import PubBooks from "./pages/PubBooks.jsx";
+import Reviews from "./pages/Reviews.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -97,10 +97,10 @@ const App = () => {
             }
           />
           <Route
-            path="review/:borrowId"
+            path="reviews"
             element={
               <Auth>
-                <Review />
+                <Reviews />
               </Auth>
             }
           />

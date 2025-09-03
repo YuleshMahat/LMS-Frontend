@@ -18,3 +18,23 @@ export const getReviewApi = async () => {
   });
   return result;
 };
+
+export const updateReviewApi = async (updateObj) => {
+  const result = await apiProcessor({
+    method: "patch",
+    url: `${apiUrl}/review`,
+    isPrivate: true,
+    data: updateObj,
+  });
+  return result;
+};
+
+export const getApprovedReviewsApi = async (bookId) => {
+  const result = await apiProcessor({
+    method: "get",
+    url: `${apiUrl}/review/approved`,
+    isPrivate: true,
+    data: { bookId },
+  });
+  return result;
+};

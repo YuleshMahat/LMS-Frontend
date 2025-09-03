@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   getBorrowBookAction,
   returnBookAction,
@@ -14,9 +12,7 @@ const MyBorrowTable = () => {
   const { userData } = useSelector((state) => state.userStore);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const [showModal, setShowModal] = useState(false);
   const [myBorrows, setMyBorrows] = useState([]);
 
   useEffect(() => {
@@ -30,16 +26,8 @@ const MyBorrowTable = () => {
     setMyBorrows(tempBorrows);
   }, [borrows]);
 
-  const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
-
   return (
     <div>
-      <ReviewModal
-        showModal={showModal}
-        handleShow={handleShow}
-        handleClose={handleClose}
-      />
       <Table striped>
         <thead>
           <tr>
@@ -65,16 +53,13 @@ const MyBorrowTable = () => {
                     className="btn"
                     style={{ backgroundColor: "#625FBC", color: "white" }}
                     onClick={() => {
-                      const data = dispatch(returnBookAction(book?._id));
-                      toast[data.status ? "success" : "error"](data.message);
+                      dispatch(returnBookAction(book?._id));
                     }}
                   >
                     Return
                   </button>
                 ) : book?.status == "returned" ? (
-                  <button className="btn btn-warning" onClick={handleShow}>
-                    Review
-                  </button>
+                  <ReviewModal borrowedBook={book} />
                 ) : (
                   "Reviewed"
                 )}

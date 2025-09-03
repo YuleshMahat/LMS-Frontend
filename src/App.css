@@ -229,3 +229,11 @@ body {
   border-radius: 5px;
   padding: 1rem;
 }
+
+/* 
+reviews page CSS */
+
+.formSwitch:checked {
+  background-color: #28a745; /* Green */
+  border-color: #28a745;
+}

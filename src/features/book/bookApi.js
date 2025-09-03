@@ -43,3 +43,11 @@ export const getAllBooks = () => {
     url: `${apiUrl}/book/pub-books`,
   });
 };
+
+export const updatePublicBookApi = (updateObj) => {
+  return apiProcessor({
+    method: "patch",
+    url: `${apiUrl}/book/pub-books`,
+    data: updateObj,
+  });
+};
