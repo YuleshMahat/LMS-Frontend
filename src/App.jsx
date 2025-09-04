@@ -24,17 +24,10 @@ import Reviews from "./pages/Reviews.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
-  const autoLogin = async () => {
-    let data = await dispatch(getUserDetails());
-  };
-
-  const getPublicBooks = async () => {
-    let data = await dispatch(getPublicBooksAction());
-  };
 
   useEffect(() => {
-    autoLogin();
-    getPublicBooks();
+    dispatch(getUserDetails());
+    dispatch(getPublicBooksAction());
   }, []);
   return (
     <>

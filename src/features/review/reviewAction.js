@@ -38,6 +38,5 @@ export const updateReviewAction = (updateObj) => async (dispatch) => {
 export const getApprovedReviewsAction = (bookId) => async (dispatch) => {
   const data = await getApprovedReviewsApi(bookId);
   dispatch(setApprovedReviews(data?.reviews));
-  toast[data?.status ? "success" : "error"](data?.message);
   return { status: data.status, message: data.message };
 };

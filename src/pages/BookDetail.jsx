@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ReviewComp from "../components/reviews/ReviewComp";
 import { getApprovedReviewsAction } from "../features/review/reviewAction";
+import { getPublicBooksAction } from "../features/book/bookActions";
 
 const BookDetail = () => {
   const { userData } = useSelector((state) => state.userStore);
@@ -24,13 +25,21 @@ const BookDetail = () => {
     setSelectedOption(e.target.name);
   };
 
+  //make sure publicbooks are available
+  useEffect(() => {
+    dispatch(getPublicBooksAction());
+  }, []);
+
+  //find the book using parameter value
   useEffect(() => {
     const searchBook = publicBooks.find((book) => book.slug == slug);
-    setBook(searchBook);
+    if (searchBook) {
+      setBook(searchBook);
+      dispatch(getApprovedReviewsAction(searchBook._id));
+    }
   }, [publicBooks]);
-  useEffect(() => {
-    dispatch(getApprovedReviewsAction());
-  }, [book]);
+
+  //set reviews after approvedReviews is changed
   useEffect(() => {
     setReviews(approvedReviews);
   }, [approvedReviews]);
@@ -115,8 +124,12 @@ const BookDetail = () => {
         <div className="bookOption">
           {selectedOption === "description"
             ? book?.description
-            : reviews.map((review) => (
-                <ReviewComp username="" rating="4.5" message="very nice book" />
+            : reviews?.map((review) => (
+                <ReviewComp
+                  username={review.userName}
+                  rating={review.rating}
+                  message={review.message}
+                />
               ))}
         </div>
       </div>

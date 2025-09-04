@@ -32,9 +32,8 @@ export const updateReviewApi = async (updateObj) => {
 export const getApprovedReviewsApi = async (bookId) => {
   const result = await apiProcessor({
     method: "get",
-    url: `${apiUrl}/review/approved`,
+    url: `${apiUrl}/review/${bookId}`,
     isPrivate: true,
-    data: { bookId },
   });
   return result;
 };
