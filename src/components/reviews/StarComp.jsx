@@ -2,7 +2,7 @@ import React from "react";
 import { FaStar as FullStar } from "react-icons/fa";
 import { FaStarHalfAlt as HalfStar } from "react-icons/fa";
 
-const StarComp = ({ rating = 1 }) => {
+const StarComp = ({ rating = 1, type = "non-clickable" }) => {
   // check if half star exists
 
   rating = parseFloat(rating);
@@ -21,15 +21,15 @@ const StarComp = ({ rating = 1 }) => {
   //4.5 = [ful ful ful ful half]
   //push full
   for (let i = 0; i < fullStar; i++) {
-    starArray.push(<FullStar className="warning" />);
+    starArray.push(<FullStar className="text-warning" />);
   }
 
   if (halfStar) {
-    starArray.push(<HalfStar className="warning" />);
+    starArray.push(<HalfStar className="text-warning" />);
   }
 
   for (let i = 0; i < emptyStar; i++) {
-    starArray.push(<EmptyStar />);
+    starArray.push(<FullStar />);
   }
   return starArray;
 };

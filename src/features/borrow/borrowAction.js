@@ -12,6 +12,7 @@ export const borrowBookAction = (borrowObj) => async (dispatch) => {
   const data = await borrowBookApi(borrowObj);
   dispatch(getBorrowBookAction());
   dispatch(getPublicBooksAction());
+  toast[data.status ? "success" : "error"](data.message);
   return { status: data.status, message: data.message };
 };
 
@@ -32,8 +33,8 @@ export const updateBorrowAction = (updateObj) => async (dispatch) => {
 
 export const returnBookAction = (borrowId) => async (dispatch) => {
   const data = await returnBookApi(borrowId);
+  toast[data.status ? "success" : "error"](data.message);
   dispatch(getBorrowBookAction());
   dispatch(getPublicBooksAction());
-  toast[data.status ? "success" : "error"](data.message);
   return { status: data.status, message: data.message };
 };

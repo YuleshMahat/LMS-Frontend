@@ -8,6 +8,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ReviewComp from "../components/reviews/ReviewComp";
 import { getApprovedReviewsAction } from "../features/review/reviewAction";
 import { getPublicBooksAction } from "../features/book/bookActions";
+import StarComp from "../components/reviews/StarComp";
 
 const BookDetail = () => {
   const { userData } = useSelector((state) => state.userStore);
@@ -59,7 +60,10 @@ const BookDetail = () => {
           <p>Genre: {book?.genre}</p>
           <p>ISBN: {book?.isbn}</p>
           <p>Published Year: {book?.publishedYear}</p>
-          <p>Average Rating: {book?.averageRating}</p>
+          <p>
+            Average Rating:
+            <StarComp rating={book?.averageRating} />
+          </p>
           {!userData._id ? (
             <button
               className="btn"
@@ -74,16 +78,14 @@ const BookDetail = () => {
             <button
               className="btn"
               style={{ backgroundColor: "#5b57c2", color: "white" }}
-              onClick={async () => {
-                const data = await dispatch(
+              onClick={() => {
+                dispatch(
                   borrowBookAction({
                     bookId: book?._id,
                     title: book?.title,
                     thumbnail: book?.thumbnail,
                   })
                 );
-                console.log(data);
-                toast[data.status ? "success" : "error"](data.message);
               }}
             >
               {userData._id ? "Borrow" : "Login to borrow"}

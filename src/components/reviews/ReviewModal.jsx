@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/form.js";
 import { submitReviewAction } from "../../features/review/reviewAction.js";
 import { useDispatch } from "react-redux";
+import StarComp from "./StarComp.jsx";
 
 const ReviewModal = ({ borrowedBook }) => {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ const ReviewModal = ({ borrowedBook }) => {
                 name="rating"
                 onChange={handleChange}
               />
+              <StarComp />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
