@@ -35,3 +35,4 @@ const StarComp = ({ rating = 1 }) => {
 };
 
 export default StarComp;
+//CHECK ON START COMPONENT TOMORROW
