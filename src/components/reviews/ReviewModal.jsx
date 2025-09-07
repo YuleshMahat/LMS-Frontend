@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/form.js";
 import { submitReviewAction } from "../../features/review/reviewAction.js";
 import { useDispatch } from "react-redux";
-import StarComp from "./StarComp.jsx";
+import { FaStar as FullStar } from "react-icons/fa";
 
 const ReviewModal = ({ borrowedBook }) => {
   const navigate = useNavigate();
@@ -17,10 +17,12 @@ const ReviewModal = ({ borrowedBook }) => {
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
-  const initialState = { rating: 1, message: "" };
+  const initialState = { message: "" };
 
   //custom form handling hook use
   const { form, handleChange } = useForm(initialState);
+
+  const [rating, setRating] = useState(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ const ReviewModal = ({ borrowedBook }) => {
         ...form,
         title: borrowedBook?.title,
         borrowId: borrowedBook?._id,
+        rating: rating,
       })
     );
     navigate("/myBorrows");
@@ -54,15 +57,25 @@ const ReviewModal = ({ borrowedBook }) => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Rating</Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 type="number"
                 min={1}
                 max={5}
                 defaultValue={1}
                 name="rating"
                 onChange={handleChange}
-              />
-              <StarComp />
+              /> */}
+              {new Array(5).fill("").map((item, index) => {
+                return (
+                  <FullStar
+                    key={index}
+                    onClick={() => {
+                      setRating(index + 1);
+                    }}
+                    className={index < rating ? "text-warning" : ""}
+                  />
+                );
+              })}
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">

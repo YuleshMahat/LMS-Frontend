@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaStar as FullStar } from "react-icons/fa";
 import { FaStarHalfAlt as HalfStar } from "react-icons/fa";
 
@@ -35,4 +35,3 @@ const StarComp = ({ rating = 1, type = "non-clickable" }) => {
 };
 
 export default StarComp;
-//CHECK ON START COMPONENT TOMORROW
