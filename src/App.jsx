@@ -21,6 +21,7 @@ import Borrows from "./pages/Borrows.jsx";
 import MyBorrows from "./pages/MyBorrows.jsx";
 import PubBooks from "./pages/PubBooks.jsx";
 import Reviews from "./pages/Reviews.jsx";
+import Search from "./pages/Search.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="verify-email" element={<Verify />} />
           <Route path="book-detail/:slug" element={<BookDetail />} />
           <Route path="pub-books" element={<PubBooks />} />
+          <Route path="search" element={<Search />} />
         </Route>
         <Route path="*" element={<DashboardLayout />}>
           <Route

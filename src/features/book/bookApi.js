@@ -37,10 +37,10 @@ export const deleteBook = (id) => {
   });
 };
 
-export const getAllBooks = () => {
+export const getAllBooks = (query = "") => {
   return apiProcessor({
     method: "get",
-    url: `${apiUrl}/book/pub-books`,
+    url: `${apiUrl}/book/pub-books?q=${query}`,
   });
 };
 
@@ -49,5 +49,11 @@ export const updatePublicBookApi = (updateObj) => {
     method: "patch",
     url: `${apiUrl}/book/pub-books`,
     data: updateObj,
+  });
+};
+
+export const searchBooksApi = async (searchQuery) => {
+  return apiProcessor({
+    method: "",
   });
 };

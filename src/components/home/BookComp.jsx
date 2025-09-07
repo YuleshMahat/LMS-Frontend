@@ -1,6 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "@mui/material";
+import StarComp from "../reviews/StarComp";
 
 const BookComp = ({
   imageLink,
@@ -25,7 +26,9 @@ const BookComp = ({
           <span className="bookTitle">{publishedYear}</span>
         </div>
         <p>Author: {author}</p>
-        <p>Average Rating: {rating}</p>
+        <p>
+          <StarComp rating={rating} />
+        </p>
         <p>{genre}</p>
       </div>
     </Link>

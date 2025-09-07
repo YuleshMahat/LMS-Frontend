@@ -21,15 +21,15 @@ const StarComp = ({ rating = 1, type = "non-clickable" }) => {
   //4.5 = [ful ful ful ful half]
   //push full
   for (let i = 0; i < fullStar; i++) {
-    starArray.push(<FullStar className="text-warning" />);
+    starArray.push(<FullStar className="text-warning" key={`full+${i}`} />);
   }
 
   if (halfStar) {
-    starArray.push(<HalfStar className="text-warning" />);
+    starArray.push(<HalfStar className="text-warning" key={`half`} />);
   }
 
   for (let i = 0; i < emptyStar; i++) {
-    starArray.push(<FullStar />);
+    starArray.push(<FullStar key={`empty+${i}`} />);
   }
   return starArray;
 };

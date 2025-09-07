@@ -9,11 +9,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form } from "react-bootstrap";
 import { IoIosSearch } from "react-icons/io";
 import { logoutAction } from "../../features/auth/authActions";
+import useForm from "../../hooks/form.js";
 
 const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userData } = useSelector((state) => state.userStore);
+
+  const initialState = { search: "" };
+  const { form, handleChange } = useForm(initialState);
+
   return (
     <Box
       sx={{
@@ -42,8 +47,16 @@ const Navigation = () => {
             placeholder="Search"
             aria-label="Username"
             aria-describedby="basic-addon1"
+            name="search"
+            value={form.search}
+            onChange={handleChange}
           />
-          <InputGroup.Text id="basic-addon1">
+          <InputGroup.Text
+            id="basic-addon1"
+            onClick={() => {
+              navigate("/search?search=" + form.search);
+            }}
+          >
             <IoIosSearch />
           </InputGroup.Text>
         </InputGroup>
