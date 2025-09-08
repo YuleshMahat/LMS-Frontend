@@ -88,7 +88,7 @@ const BookDetail = () => {
                 );
               }}
             >
-              {userData._id ? "Borrow" : "Login to borrow"}
+              Add to Cart
             </button>
           ) : (
             <button className="btn btn-outline-secondary" disabled>

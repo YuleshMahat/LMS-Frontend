@@ -9,7 +9,7 @@ const Home = () => {
     setIndex(selectedIndex);
   };
   return (
-    <>
+    <div className="d-flex flex-column flex-grow-1">
       <Carousel
         activeIndex={index}
         onSelect={handleSelect}
@@ -49,7 +49,7 @@ const Home = () => {
       <BookFeature heading="Recent Books" />
       <BookFeature heading="Most Read" />
       <BookFeature heading="Recommended" />
-    </>
+    </div>
   );
 };
 

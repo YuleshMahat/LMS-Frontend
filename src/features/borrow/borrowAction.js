@@ -9,10 +9,17 @@ import { getPublicBooksAction } from "../book/bookActions.js";
 import { toast } from "react-toastify";
 
 export const borrowBookAction = (borrowObj) => async (dispatch) => {
-  const data = await borrowBookApi(borrowObj);
+  const dataPending = borrowBookApi(borrowObj);
+
+  toast.promise(dataPending, {
+    pending: "Please wait...",
+  });
+
+  const data = await dataPending;
+  console.log(data);
+  toast[data.status ? "success" : "error"](data.message);
   dispatch(getBorrowBookAction());
   dispatch(getPublicBooksAction());
-  toast[data.status ? "success" : "error"](data.message);
   return { status: data.status, message: data.message };
 };
 

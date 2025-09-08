@@ -10,6 +10,7 @@ import { InputGroup, Form } from "react-bootstrap";
 import { IoIosSearch } from "react-icons/io";
 import { logoutAction } from "../../features/auth/authActions";
 import useForm from "../../hooks/form.js";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const Navigation = () => {
             onClick={() => {
               navigate("/search?search=" + form.search);
             }}
+            style={{ cursor: "pointer" }}
           >
             <IoIosSearch />
           </InputGroup.Text>
@@ -104,6 +106,10 @@ const Navigation = () => {
               <span>Login</span>
             </Link>
           )}
+        </Box>
+
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          {userData?._id && <FaShoppingCart />}
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>

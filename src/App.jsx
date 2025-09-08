@@ -14,6 +14,7 @@ import AddBook from "./pages/AddBook.jsx";
 import { Books } from "./pages/Books.jsx";
 import EditBook from "./pages/EditBook.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { getPublicBooksAction } from "./features/book/bookActions.js";
 import BookDetail from "./pages/BookDetail.jsx";

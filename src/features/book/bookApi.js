@@ -37,10 +37,10 @@ export const deleteBook = (id) => {
   });
 };
 
-export const getAllBooks = (query = "") => {
+export const getAllBooks = (query = "", pageLimit = 10, pageNumber = 1) => {
   return apiProcessor({
     method: "get",
-    url: `${apiUrl}/book/pub-books?q=${query}`,
+    url: `${apiUrl}/book/pub-books?q=${query}&lm=${pageLimit}&pn=${pageNumber}`,
   });
 };
 
