@@ -9,6 +9,7 @@ import ReviewComp from "../components/reviews/ReviewComp";
 import { getApprovedReviewsAction } from "../features/review/reviewAction";
 import { getPublicBooksAction } from "../features/book/bookActions";
 import StarComp from "../components/reviews/StarComp";
+import { addToCartAction } from "../features/cart/cartAction";
 
 const BookDetail = () => {
   const { userData } = useSelector((state) => state.userStore);
@@ -21,6 +22,7 @@ const BookDetail = () => {
   const [reviews, setReviews] = useState([]);
   const [selectedOption, setSelectedOption] = useState("description");
   const { approvedReviews } = useSelector((state) => state.reviewStore);
+  const { cartBooks, totalPrice } = useSelector((state) => state.cartStore);
 
   const handleOptionClick = (e) => {
     setSelectedOption(e.target.name);
@@ -75,21 +77,39 @@ const BookDetail = () => {
               Login to Borrow
             </button>
           ) : book?.availability ? (
-            <button
-              className="btn"
-              style={{ backgroundColor: "#5b57c2", color: "white" }}
-              onClick={() => {
-                dispatch(
-                  borrowBookAction({
-                    bookId: book?._id,
-                    title: book?.title,
-                    thumbnail: book?.thumbnail,
-                  })
-                );
-              }}
-            >
-              Add to Cart
-            </button>
+            cartBooks?.find((cartBook) => cartBook.bookId == book?._id) ? (
+              <button
+                className="btn"
+                style={{ color: "white", backgroundColor: "#3B38A0" }}
+                onClick={() => {
+                  navigate("/cart");
+                }}
+              >
+                Go to Checkout
+              </button>
+            ) : (
+              <button
+                className="btn"
+                style={{ backgroundColor: "#5b57c2", color: "white" }}
+                onClick={() => {
+                  dispatch(
+                    addToCartAction(
+                      [
+                        ...cartBooks,
+                        {
+                          bookId: book?._id,
+                          title: book?.title,
+                          thumbnail: book?.thumbnail,
+                        },
+                      ],
+                      totalPrice
+                    )
+                  );
+                }}
+              >
+                Add to Cart
+              </button>
+            )
           ) : (
             <button className="btn btn-outline-secondary" disabled>
               {book?.expectedAvailable}

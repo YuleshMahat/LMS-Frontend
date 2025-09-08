@@ -23,6 +23,8 @@ import MyBorrows from "./pages/MyBorrows.jsx";
 import PubBooks from "./pages/PubBooks.jsx";
 import Reviews from "./pages/Reviews.jsx";
 import Search from "./pages/Search.jsx";
+import Checkout from "./pages/Checkout.jsx";
+import Cart from "./pages/Cart.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -97,6 +99,22 @@ const App = () => {
             element={
               <Auth>
                 <Reviews />
+              </Auth>
+            }
+          />
+          <Route
+            path="checkout"
+            element={
+              <Auth>
+                <Checkout />
+              </Auth>
+            }
+          />
+          <Route
+            path="cart"
+            element={
+              <Auth>
+                <Cart />
               </Auth>
             }
           />

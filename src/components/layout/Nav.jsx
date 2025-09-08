@@ -16,6 +16,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userData } = useSelector((state) => state.userStore);
+  const { cartBooks } = useSelector((state) => state.cartStore);
 
   const initialState = { search: "" };
   const { form, handleChange } = useForm(initialState);
@@ -108,7 +109,21 @@ const Navigation = () => {
           )}
         </Box>
 
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        {/* cart icon */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            position: "relative",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            navigate("/cart");
+          }}
+        >
+          {cartBooks?.length != 0 && (
+            <div className="cartCounter">{cartBooks?.length}</div>
+          )}
           {userData?._id && <FaShoppingCart />}
         </Box>
 
