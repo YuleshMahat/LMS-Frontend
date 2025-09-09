@@ -5,7 +5,7 @@ import {
   getBorrowBookAction,
   returnBookAction,
 } from "../../features/borrow/borrowAction";
-import ReviewModal from "../reviews/reviewModal";
+import ReviewModal from "../reviews/ReviewModal";
 
 const MyBorrowTable = () => {
   const { borrows } = useSelector((state) => state.borrowStore);
