@@ -83,6 +83,23 @@ body {
   font-weight: 770;
 }
 
+.backButton {
+  width: 150px;
+  border: solid rgb(193, 193, 193) 1px;
+  padding: 0.3rem;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Add book form CSS */
 .addBookContainer {
   background-color: #7f818c54;
   display: flex;
