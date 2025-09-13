@@ -67,38 +67,6 @@ body {
   gap: "0.35rem";
 }
 
-/* cart css */
-.cartCounter {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background-color: #7abad3;
-  border-radius: 50%;
-  font-size: 10px;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 770;
-}
-
-.backButton {
-  width: 150px;
-  border: solid rgb(193, 193, 193) 1px;
-  padding: 0.3rem;
-  border-radius: 5px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.tableContainer {
-  display: flex;
-  flex-direction: row;
-}
-
 /* Add book form CSS */
 .addBookContainer {
   background-color: #7f818c54;
@@ -286,6 +254,39 @@ reviews page CSS */
 }
 
 /* Cart page CSS */
+
+.cartCounter {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #7abad3;
+  border-radius: 50%;
+  font-size: 10px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 770;
+}
+
+.backButton {
+  width: 150px;
+  border: solid rgb(193, 193, 193) 1px;
+  padding: 0.3rem;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
 .cartContainer {
   flex-grow: 1;
   display: flex;
@@ -296,4 +297,18 @@ reviews page CSS */
 .cartContainer h2 {
   letter-spacing: 0.05px;
   font-family: "Helvetica";
+}
+
+.summaryContainer {
+  border: solid #dee2e6 1px;
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+  max-height: 500px;
+}
+
+.line-grey {
+  background-color: #dee2e6;
+  margin: 0;
+  max-height: 1px;
 }
