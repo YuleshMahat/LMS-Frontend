@@ -35,7 +35,7 @@ const Cart = () => {
           </thead>
           <tbody>
             {cartBooks?.map((book) => (
-              <tr>
+              <tr key={book.bookId}>
                 <td>{book.title}</td>
                 <td>1</td>
                 <td>$5</td>
