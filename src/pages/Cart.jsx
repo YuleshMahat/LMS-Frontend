@@ -3,8 +3,22 @@ import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { sendIntentApi } from "../features/checkout/checkoutApi";
+import { toast } from "react-toastify";
+
 const Cart = () => {
   const { cartBooks, totalPrice } = useSelector((state) => state.cartStore);
+  const navigate = useNavigate();
+
+  const handleCheckout = async () => {
+    const response = await sendIntentApi(totalPrice);
+    if (response.status) {
+      navigate("/checkout/" + response.clientSecret);
+    } else {
+      toast.error["Error!"];
+    }
+  };
 
   return (
     <div className="cartContainer">
@@ -52,7 +66,9 @@ const Cart = () => {
             <p>Total</p>
             <p>${totalPrice}</p>
           </div>
-          <Button className="btn btn-primary">Checkout</Button>
+          <Button className="btn btn-primary" onClick={handleCheckout}>
+            Checkout
+          </Button>
         </div>
       </div>
       <button className="backButton">

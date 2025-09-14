@@ -103,7 +103,7 @@ const App = () => {
             }
           />
           <Route
-            path="checkout"
+            path="checkout/:clientSecret"
             element={
               <Auth>
                 <Checkout />
