@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -15,7 +15,7 @@ const Checkout = () => {
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
   return (
-    <div>
+    <div className="p-4">
       <h1>Securely Checkout</h1>
 
       {/* Your payment components */}
@@ -31,27 +31,40 @@ const Checkout = () => {
   );
 };
 
+// create a form becasue we cannot use useStripe and elements hook outside Elements component
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
-    const { error } = await stripe.confirmPayment({
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       redirect: "if_required",
     });
     if (error) {
       toast.error("Error making the payment");
-    } else {
+    }
+
+    if (paymentIntent && paymentIntent.status === "succeeded") {
       toast.success("Payment successful");
+      navigate("/thankyou");
+    } else {
+      toast.error("Payment could not be completed.");
     }
   };
   return (
     <form onSubmit={handleOnSubmit}>
       <PaymentElement />
-      <button type="submit">Pay Now</button>
+      <button
+        className="btn mt-3"
+        style={{ backgroundColor: "#625FBC", color: "white" }}
+        type="submit"
+      >
+        Pay Now
+      </button>
     </form>
   );
 };
