@@ -1,11 +1,11 @@
 import { apiUrl, apiProcessor } from "../../services/apiProcessor.js";
 
-export const borrowBookApi = async (borrowObj) => {
+export const borrowBookApi = async (borrowArr) => {
   const result = await apiProcessor({
     method: "post",
     url: `${apiUrl}/borrow`,
     isPrivate: true,
-    data: borrowObj,
+    data: { borrowArr },
   });
   return result;
 };

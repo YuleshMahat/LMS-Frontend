@@ -6,20 +6,21 @@ import {
 } from "./borrowApi.js";
 import { setBorrows } from "./borrowSlice.js";
 import { getPublicBooksAction } from "../book/bookActions.js";
+import { clearCartAction } from "../cart/cartAction.js";
 import { toast } from "react-toastify";
 
-export const borrowBookAction = (borrowObj) => async (dispatch) => {
-  const dataPending = borrowBookApi(borrowObj);
+export const borrowBookAction = (borrowBooksArr) => async (dispatch) => {
+  const dataPending = borrowBookApi(borrowBooksArr);
 
   toast.promise(dataPending, {
     pending: "Please wait...",
   });
 
   const data = await dataPending;
-  console.log(data);
   toast[data.status ? "success" : "error"](data.message);
   dispatch(getBorrowBookAction());
   dispatch(getPublicBooksAction());
+  dispatch(clearCartAction());
   return { status: data.status, message: data.message };
 };
 

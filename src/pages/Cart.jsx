@@ -24,28 +24,37 @@ const Cart = () => {
     <div className="cartContainer">
       <h2>Books Cart</h2>
       <div className="tableContainer">
-        <Table>
-          <thead>
-            <tr>
-              <th style={{ width: "60%" }}>Item</th>
-              <th style={{ width: "17%" }}>Quantity</th>
-              <th style={{ width: "17%" }}>Subtotal</th>
-              <th style={{ width: "6%" }}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartBooks?.map((book) => (
-              <tr key={book.bookId}>
-                <td>{book.title}</td>
-                <td>1</td>
-                <td>$5</td>
-                <td>
-                  <RxCross2 style={{ color: "grey" }} />
-                </td>
+        {cartBooks.length !== 0 ? (
+          <Table>
+            <thead>
+              <tr>
+                <th style={{ width: "60%" }}>Item</th>
+                <th style={{ width: "17%" }}>Quantity</th>
+                <th style={{ width: "17%" }}>Subtotal</th>
+                <th style={{ width: "6%" }}></th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {cartBooks?.map((book) => (
+                <tr key={book.bookId}>
+                  <td>{book.title}</td>
+                  <td>1</td>
+                  <td>$5</td>
+                  <td>
+                    <RxCross2 style={{ color: "grey" }} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <Table>
+            <tr>
+              <td>No items in the cart</td>
+            </tr>
+          </Table>
+        )}
+
         <div className="d-flex p-3 flex-column summaryContainer justify-content-around">
           <h4>Summary</h4>
           <div className="line line-grey"></div>

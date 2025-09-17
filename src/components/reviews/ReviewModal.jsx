@@ -38,7 +38,6 @@ const ReviewModal = ({ borrowedBook }) => {
         rating: rating,
       })
     );
-    navigate("/myBorrows");
   };
 
   return (
