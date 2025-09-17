@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, TextField, Typography, Button } from "@mui/material";
 import { createUser } from "../../services/apiProcessor.js";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import useForm from "../../hooks/form.js";
 
 const RegisterForm = () => {
@@ -94,7 +94,6 @@ const RegisterForm = () => {
       >
         Submit
       </Button>
-      <ToastContainer />
     </form>
   );
 };

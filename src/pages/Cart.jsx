@@ -50,7 +50,9 @@ const Cart = () => {
         ) : (
           <Table>
             <tr>
-              <td>No items in the cart</td>
+              <td style={{ textAlign: "center" }}>
+                <h4>No items in the cart!</h4>
+              </td>
             </tr>
           </Table>
         )}
@@ -80,7 +82,12 @@ const Cart = () => {
           </Button>
         </div>
       </div>
-      <button className="backButton">
+      <button
+        className="backButton"
+        onClick={() => {
+          navigate("/pub-books");
+        }}
+      >
         <IoIosArrowBack />
         Continue browsing
       </button>

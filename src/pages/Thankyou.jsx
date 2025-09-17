@@ -7,7 +7,9 @@ const Thankyou = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(borrowBookAction(cartBooks));
+    if (cartBooks.length !== 0) {
+      dispatch(borrowBookAction(cartBooks));
+    }
   }, []);
   return <div>Thankyou</div>;
 };

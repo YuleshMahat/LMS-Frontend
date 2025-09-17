@@ -14,10 +14,11 @@ export const borrowBookAction = (borrowBooksArr) => async (dispatch) => {
 
   toast.promise(dataPending, {
     pending: "Please wait...",
+    success: "Borrow successul",
+    error: "Error on borrow",
   });
 
   const data = await dataPending;
-  toast[data.status ? "success" : "error"](data.message);
   dispatch(getBorrowBookAction());
   dispatch(getPublicBooksAction());
   dispatch(clearCartAction());

@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { loginUserAction } from "../../features/auth/authActions.js";
 import useForm from "../../hooks/form.js";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function BasicExample() {
   const navigate = useNavigate();
@@ -75,7 +75,6 @@ function BasicExample() {
       >
         Submit
       </Button>
-      <ToastContainer />
     </form>
   );
 }
