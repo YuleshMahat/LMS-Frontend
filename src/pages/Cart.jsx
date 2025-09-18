@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { sendIntentApi } from "../features/checkout/checkoutApi";
 import { toast } from "react-toastify";
+import { setBooks } from "../features/cart/cartSlice";
 
 const Cart = () => {
   const { cartBooks, totalPrice } = useSelector((state) => state.cartStore);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleCheckout = async () => {
     const response = await sendIntentApi(totalPrice);
@@ -19,6 +21,14 @@ const Cart = () => {
       toast.error["Error!"];
     }
   };
+
+  const handleDelete = (bookId) => {
+    console.log("Delte button clicked");
+    const newCartArray = cartBooks.filter((book) => book.bookId !== bookId);
+    dispatch(setBooks(newCartArray));
+  };
+
+  useEffect(() => {}, [cartBooks]);
 
   return (
     <div className="cartContainer">
@@ -41,7 +51,12 @@ const Cart = () => {
                   <td>1</td>
                   <td>$5</td>
                   <td>
-                    <RxCross2 style={{ color: "grey" }} />
+                    <RxCross2
+                      style={{ color: "grey", cursor: "pointer" }}
+                      onClick={() => {
+                        handleDelete(book.bookId);
+                      }}
+                    />
                   </td>
                 </tr>
               ))}
