@@ -26,6 +26,7 @@ import Search from "./pages/Search.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import Cart from "./pages/Cart.jsx";
 import Thankyou from "./pages/Thankyou.jsx";
+import Admin from "./pages/Admin.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -124,6 +125,14 @@ const App = () => {
             element={
               <Auth>
                 <Thankyou />
+              </Auth>
+            }
+          />
+          <Route
+            path="admin"
+            element={
+              <Auth>
+                <Admin />
               </Auth>
             }
           />

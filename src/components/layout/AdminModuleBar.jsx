@@ -30,7 +30,7 @@ const AdminModuleBar = () => {
       isAdmin: true,
     },
     { link: "/users", label: "Users", icon: <PiUsers />, isAdmin: true },
-    { link: "/admins", label: "Admins", icon: <RiAdminFill />, isAdmin: true },
+    { link: "/admin", label: "Admins", icon: <RiAdminFill />, isAdmin: true },
     {
       link: "/borrows",
       label: "Borrows",
