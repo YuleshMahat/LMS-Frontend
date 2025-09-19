@@ -27,6 +27,7 @@ import Checkout from "./pages/Checkout.jsx";
 import Cart from "./pages/Cart.jsx";
 import Thankyou from "./pages/Thankyou.jsx";
 import Admin from "./pages/Admin.jsx";
+import Users from "./pages/Users.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -133,6 +134,14 @@ const App = () => {
             element={
               <Auth>
                 <Admin />
+              </Auth>
+            }
+          />
+          <Route
+            path="users"
+            element={
+              <Auth>
+                <Users />
               </Auth>
             }
           />
