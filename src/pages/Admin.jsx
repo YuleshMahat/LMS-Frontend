@@ -20,6 +20,15 @@ const Admin = () => {
 
   const handleChange = async (id) => {
     const result = await changeAdminStatus(id);
+    if (result?.status) {
+      setAdminUsers((prev) =>
+        prev.map((admin) =>
+          admin._id === id
+            ? { ...admin, role: admin.role === "admin" ? "student" : "admin" }
+            : admin
+        )
+      );
+    }
     toast[result?.status ? "success" : "error"](result?.message);
   };
 
@@ -46,9 +55,8 @@ const Admin = () => {
                 <Form>
                   <Form.Check
                     type="switch"
-                    id="custom-switch"
                     className="formSwitch"
-                    checked={admin.role == "admin" ? true : false}
+                    checked={admin.role == "admin"}
                     onChange={() => {
                       handleChange(admin._id);
                     }}
