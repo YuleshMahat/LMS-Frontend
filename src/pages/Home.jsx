@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import BookFeature from "../components/home/BookFeature.jsx";
+import { getFeatureBooksApi } from "../features/book/bookApi.js";
 
 const Home = () => {
   const [index, setIndex] = useState(0);
+  const [featureBooks, setFeatureBooks] = useState({});
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
+
+  useEffect(() => {
+    const getFeatureBooks = async () => {
+      const result = await getFeatureBooksApi();
+      if (result?.status) {
+        setFeatureBooks({
+          mostBorrowed: result.mostBorrowedBooks,
+          recentlyAdded: result.recentlyAddedBooks,
+          mostRated: result.mostRatedBooks,
+        });
+      }
+    };
+    getFeatureBooks();
+  }, []);
   return (
     <div className="d-flex flex-column flex-grow-1">
       <Carousel

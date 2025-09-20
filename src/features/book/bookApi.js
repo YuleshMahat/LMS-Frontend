@@ -52,8 +52,9 @@ export const updatePublicBookApi = (updateObj) => {
   });
 };
 
-export const searchBooksApi = async (searchQuery) => {
+export const getFeatureBooksApi = async () => {
   return apiProcessor({
-    method: "",
+    method: "get",
+    url: `${apiUrl}/book/featured-books`,
   });
 };
