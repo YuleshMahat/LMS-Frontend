@@ -12,7 +12,7 @@ export const getUserDetails = () => async (dispatch) => {
 };
 
 export const loginUserAction = (form) => async (dispatch) => {
-  let data = await loginUser(form);
+  console.log(data);
   if (data.status) {
     storeToken(data.accessToken, "access");
     storeToken(data.refreshToken, "refresh");

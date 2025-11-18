@@ -26,15 +26,11 @@ export const apiProcessor = async ({
 
     return response.data;
   } catch (err) {
-    console.log("catch block of api processor.");
     if (err?.response?.data?.message?.includes("Expired access token")) {
-      console.log("Inside if block of catch");
-      const data = await regenerateAccessToken();
+      const refreshResult = await regenerateAccessToken();
 
-      if (data?.accessToken) {
-        console.log("After regenerating token new token ", data.accessToken);
-        console.log("refresh token", getToken("refresh"));
-        storeToken(data.accessToken, "access");
+      if (refreshResult?.accessToken) {
+        storeToken(refreshResult.accessToken, "access");
         return apiProcessor({
           method,
           data,
@@ -47,7 +43,7 @@ export const apiProcessor = async ({
 
     return {
       status: false,
-      message: "Error processing the api request",
+      message: err?.response?.data?.message,
     };
   }
 };

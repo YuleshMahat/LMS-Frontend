@@ -19,7 +19,7 @@ function BasicExample() {
       if (result?.status) {
         toast.success("Login Successful");
       } else {
-        toast.error("Username or password incorrect");
+        toast.error(result.message);
       }
     } catch (error) {
       console.log(error.message);
