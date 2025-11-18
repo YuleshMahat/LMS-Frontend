@@ -48,7 +48,7 @@ const Search = () => {
         {searchedBooks.map((book) => (
           <BookComp
             key={book?._id}
-            imageLink={"images/book2.jpg"}
+            imageLink={book?.image}
             title={book?.title}
             rating={book?.averageRating}
             genre={book?.genre}

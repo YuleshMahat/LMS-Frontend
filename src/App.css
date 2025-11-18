@@ -12,6 +12,7 @@
 .dashboardLayout {
   display: flex;
   min-height: 100vh;
+  height: 100vh;
 }
 
 .moduleBar {
@@ -149,7 +150,20 @@ body {
   padding: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  flex-grow: 1;
+  flex: 0 1 auto;
+}
+
+.books {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 1360px) and (max-width: 1792px) {
+  .books {
+    justify-content: flex-start;
+  }
 }
 
 .featureImage {
@@ -161,14 +175,6 @@ body {
 .bookTitle {
   font-size: 1.3rem;
   font-weight: 600;
-}
-
-.books {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 2rem;
 }
 
 /* book detail page css */

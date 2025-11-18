@@ -7,9 +7,9 @@ const PubBooks = () => {
   const { publicBooks } = useSelector((state) => state.bookStore);
 
   return (
-    <Container className=" mt-5">
+    <div className="mt-5 container">
       <h1 className="mb-4">Our books!</h1>
-      <div className="d-flex flex-row flex-wrap gap-5">
+      <div className="d-flex flex-row flex-wrap gap-5 justify-content-around">
         {publicBooks.map((book) => (
           <BookComp
             imageLink={book.image || "/images/placeholder.webp"}
@@ -23,7 +23,7 @@ const PubBooks = () => {
           />
         ))}
       </div>
-    </Container>
+    </div>
   );
 };
 

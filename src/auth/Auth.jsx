@@ -5,21 +5,13 @@ import { getToken } from "../services/storageFunctions.js";
 const Auth = ({ children }) => {
   const location = useLocation();
   const token = getToken("access");
-  let user = {};
-  if (token) {
-    const { userData } = useSelector((store) => store.userStore);
-    user = userData;
+  const { userData } = useSelector((store) => store.userStore);
+
+  if (!token || !userData?._id) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  return (
-    <>
-      {user && user._id ? (
-        children
-      ) : (
-        <Navigate to="/login" replace state={{ from: location }} />
-      )}
-    </>
-  );
+  return children;
 };
 
 export default Auth;

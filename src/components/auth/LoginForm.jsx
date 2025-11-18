@@ -14,16 +14,11 @@ function BasicExample() {
   const { form, handleChange } = useForm(initialState);
   async function handleSubmit(e) {
     e.preventDefault();
-    try {
-      const result = await dispatch(loginUserAction({ ...form }));
-      if (result?.status) {
-        toast.success("Login Successful");
-      } else {
-        toast.error(result.message);
-      }
-    } catch (error) {
-      console.log(error.message);
-      alert("An error occured during loggin in");
+    const result = await dispatch(loginUserAction({ ...form }));
+    if (result?.status) {
+      toast.success("Login Successful");
+    } else {
+      toast.error(result.message);
     }
   }
   const { userData } = useSelector((store) => store.userStore);
