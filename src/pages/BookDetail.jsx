@@ -51,7 +51,7 @@ const BookDetail = () => {
     <div className="bookContainer">
       <div className="d-flex flex-row" style={{ gap: "8rem" }}>
         <img
-          src="/images/books1.jpg"
+          src={book?.image || "/images/placeholder.webp"}
           alt="bookCover"
           className="bookDetailCover"
         />

@@ -38,7 +38,7 @@ const Home = () => {
             className="carouselImages"
           />
           <Carousel.Caption>
-            <h3>Burrow with us!</h3>
+            <h3>Borrow with us!</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -62,9 +62,12 @@ const Home = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      <BookFeature heading="Recent Books" />
-      <BookFeature heading="Most Read" />
-      <BookFeature heading="Recommended" />
+      <BookFeature
+        heading="Recent Books"
+        bookList={featureBooks.recentlyAdded}
+      />
+      <BookFeature heading="Most Read" bookList={featureBooks.mostBorrowed} />
+      <BookFeature heading="Recommended" bookList={featureBooks.mostRated} />
     </div>
   );
 };

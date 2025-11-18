@@ -20,7 +20,12 @@ const BookComp = ({
       className="bookComp"
     >
       <div>
-        <img src="/images/image1.jpg" alt="image1" className="featureImage" />
+        {console.log(122121, imageLink)}
+        <img
+          src={imageLink ? imageLink : "/images/placeholder.webp"}
+          alt="thumbnail"
+          className="featureImage"
+        />
         <div className="d-flex justify-content-between">
           <span className="bookTitle">{title}</span>
           <span className="bookTitle">{publishedYear}</span>

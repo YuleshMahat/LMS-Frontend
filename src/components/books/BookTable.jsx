@@ -17,12 +17,14 @@ function StripedRowExample() {
   }, []);
 
   const handleDelete = async (id) => {
-    const result = await deleteBook(id);
-    if (result?.status) {
-      toast.success("Book successfully deleted");
-      dispatch(getBookAction());
-    } else {
-      toast.error(toast.message);
+    if (window.confirm("Do you want to delete this book?")) {
+      const result = await deleteBook(id);
+      if (result?.status) {
+        toast.success("Book successfully deleted");
+        dispatch(getBookAction());
+      } else {
+        toast.error(toast.message);
+      }
     }
   };
 
@@ -44,7 +46,9 @@ function StripedRowExample() {
       <tbody>
         {books.map((book, index) => (
           <tr key={index}>
-            <td>image</td>
+            <td>
+              <img src={book.image || null} alt="thumbnail" width="80px" />
+            </td>
             <td>{book.title}</td>
             <td>{book.author}</td>
             <td>{book.isbn}</td>

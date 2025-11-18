@@ -37,7 +37,7 @@ const Navigation = () => {
         <Link component={RouterLink} to="/" underline="none" color="inherit">
           <Box sx={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
             <FaBook />
-            BurrowABook
+            BorrowABook
           </Box>
         </Link>
       </Box>

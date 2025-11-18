@@ -108,6 +108,7 @@ function BookForm() {
           type="file"
           name="thumbnail"
           onChange={handleThumbnailChange}
+          required
         />
       </Form.Group>
       <Button

@@ -10,10 +10,9 @@ const PubBooks = () => {
     <Container className=" mt-5">
       <h1 className="mb-4">Our books!</h1>
       <div className="d-flex flex-row flex-wrap gap-5">
-        {" "}
         {publicBooks.map((book) => (
           <BookComp
-            imageLink="https://m.media-amazon.com/images/G/35/apparel/rcxgs/tile._CB483369938_.gif"
+            imageLink={book.image || "/images/placeholder.webp"}
             title={book.title}
             rating={book.averageRating}
             genre={book.genre}

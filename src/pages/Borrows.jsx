@@ -1,5 +1,5 @@
 import React from "react";
-import BorrowTable from "../components/borrows/BorrowTable";
+import BorrowTable from "../components/borrows/BorrowTable.jsx";
 
 const Borrows = () => {
   return (
